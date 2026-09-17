@@ -6,8 +6,9 @@ After a session, one command:
 
 1. **records** the Discord call (or takes a recording you already have),
 2. **transcribes** it on your own PC with Whisper (free, private),
-3. has **Claude** write the session recap and update NPCs, places, quests, mysteries, loot, kills and quotes,
-4. **publishes** it to the GitHub Pages site.
+3. has **Claude** write a funny but accurate recap, and update NPCs, places, quests, mysteries, loot, kills and quotes,
+4. opens a **review window** where you cut, fix and regenerate the notes,
+5. **publishes** them to the GitHub Pages site.
 
 ```
 recording ──► transcripts/session-07.txt ──► drafts/session-07.json ──► data/campaign.json ──► website
@@ -35,12 +36,15 @@ The website is `index.html`. It reads everything from `data/campaign.json`, so y
 4. After about a minute, your site is live at `https://YOUR-USERNAME.github.io/dnd-chronicle/`.
 
 ### 2. Install the Python pieces
+You need **Python 3.10 or newer** (3.12 recommended). Check with `py --list`. If you don't see 3.10 or higher, run `winget install Python.Python.3.12` or download Python from <https://www.python.org/downloads/>.
+
 ```powershell
-py -m venv .venv
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned   # one time only; answer Y
+py -3.12 -m venv .venv
 .venv\Scripts\activate
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
-(Run `.venv\Scripts\activate` again each time you open a new terminal.)
+Windows blocks PowerShell scripts by default, so without the first line `activate` fails with "running scripts is disabled on this system". Run `.venv\Scripts\activate` again each time you open a new terminal. You'll know it worked when the prompt starts with `(.venv)`.
 
 ### 3. Add your keys and settings
 ```powershell
@@ -98,37 +102,46 @@ python scribe.py process "D:\recordings\session 7.mp4"
 
 ---
 
-## What `process` does
+## After the session: review, then publish
 
-```
-== Session 7 ==
-Loading Whisper model 'small.en' ...
-[1/5] Transcribing 1-kingkale.flac (Kale (Thorn)) ...
-...
-Asking claude-sonnet-5 to write the notes ...
-Draft ready: "The Lantern Witch"
-Save your edits, then press Enter to publish (or type q to stop here):
+```powershell
+python scribe.py process "C:\path\to\recording-or-craig.zip"
 ```
 
-The draft (`drafts/session-07.json`) opens in your editor. Fix any misheard names or wrong details, save it, then press **Enter**. The Scribe merges the draft into `data/campaign.json`, commits, and pushes. The site updates within a minute or two.
+This transcribes the recording and has Claude write a draft. Then a **review window** opens in your browser:
+
+| In the window | What it does |
+|---|---|
+| **Edit** any text | Click any text and change it. |
+| **✕ Cut** | Marks something that didn't happen or that you don't want. Cut items turn red. |
+| **Claude wasn't sure about** | Things Claude couldn't confirm (was that real or a joke?). Click **It happened** or **Didn't happen**. |
+| **Tell Claude what to fix** | Type corrections, e.g. "The bartender fight was a joke" or "make the dragon part funnier". |
+| **↻ Regenerate** | Claude rewrites the whole draft using your cuts, answers and notes. It remembers them for this session, so later rewrites keep them. |
+| **Check the transcript** | Search what was actually said. |
+| **Post to campaign** | Adds the notes to `data/campaign.json`. Cut items are dropped. |
+| **Commit & push** | Publishes to GitHub Pages. |
+| **Close** | Ends the review. Your draft is saved. |
+
+Reopen the review window any time with `python scribe.py review --session 7`.
 
 Useful options:
 
 | Command | What it does |
 |---|---|
 | `process FILE --session 7` | Set the session number. By default it uses the next number. |
-| `process FILE --date 2026-09-12` | Set the session date. By default it uses today. |
-| `process FILE --no-review` | Skip the review pause and publish right away. |
+| `process FILE --date 2026-09-12` | Set the session date. You can also change it in the review window. |
 | `process FILE --retranscribe` | Redo the transcript even if one is saved. |
-| `notes --session 7` | Have Claude rewrite the notes from the saved transcript. |
-| `apply --session 7` | Publish a draft you edited by hand. |
-| `transcribe FILE --session 7` | Only make the transcript. |
+| `process FILE --fresh` | Throw away the existing draft and write new notes. |
+| `notes --session 7` | Write fresh notes from the saved transcript, then review them. |
+| `process FILE --no-review` | Skip the window and publish right away. |
 
-**Re-running a session is safe.** It replaces what that session added before, so you won't get duplicates.
+Regenerating is cheap because the transcript is cached for a few minutes, so rewrites after the first draft cost much less.
+
+**Re-posting a session is safe.** It replaces what that session added before, so you won't get duplicates.
 
 ## Editing things by hand
 
-- **A session's notes:** edit `drafts/session-NN.json`, then run `python scribe.py apply --session NN`.
+- **A session's notes:** run `python scribe.py review --session NN`, fix things, then Post and Commit & push.
 - **Characters, NPC descriptions and anything else:** edit `data/campaign.json` directly, then `git commit` and `git push`. Add `"manual": true` to an NPC, place or mystery you wrote yourself. That keeps it from being removed when a session is re-run and stops Claude from overwriting its description.
 - **Nicknames:** add `"aliases": ["Old Pipe Guy"]` to an NPC so later sessions merge into the same entry.
 - **Friends can contribute:** add them as collaborators on GitHub. The Scribe runs `git pull` before every publish, so their edits aren't overwritten.

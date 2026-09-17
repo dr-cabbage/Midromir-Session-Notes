@@ -6,11 +6,13 @@ claude_model: claude-sonnet-5
 
 # How the recap should read.
 notes_style: >
-  Lively and a little funny, like a party member keeping a journal.
-  Past tense. Keep it accurate.
+  Informative first, funny second: someone who missed the session should know exactly
+  what happened, and laugh while reading it. Dry, playful narrator voice, like a party member
+  who has seen too much keeping a journal. Past tense. Never make things up for a joke.
 
 # Anything that helps Claude understand the table: who the DM is, running jokes,
 # names Whisper keeps mangling, house rules, etc.
+# Running jokes and recurring bits help Claude tell a bit from real events.
 dm_context: |
   The DM is Sam. Kale plays Thorn, a half-elf ranger.
   The villain is named Vex'Ahlia (often transcribed as "vexalia").

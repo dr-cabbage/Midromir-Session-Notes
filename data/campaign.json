@@ -1,9 +1,9 @@
 {
   "campaign": {
-    "title": "Our Campaign",
+    "title": "Midromir",
     "subtitle": "The adventures of a party that should probably not be trusted with anything.",
     "setting": "Homebrew world",
-    "dm": "Your DM's name"
+    "dm": "Kline"
   },
   "party": [
     {

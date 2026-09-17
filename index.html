@@ -291,6 +291,7 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
           ${(s.recap || []).map(p => `<p>${hl(p)}</p>`).join("")}
           ${sect("Highlights", s.highlights)}
           ${sect("Big decisions", s.decisions)}
+          ${sect("Table talk (not canon)", s.table_talk)}
           ${loot.length ? `<h4>Loot</h4><ul>${loot.map(l => `<li><b>${hl(l.item)}</b>${l.holder ? " → " + hl(l.holder) : ""}${l.description ? " — " + hl(l.description) : ""}</li>`).join("")}</ul>` : ""}
           ${kills.length ? `<h4>Kills</h4><ul>${kills.map(k => `<li>${hl(k.character)}: ${k.count}× ${hl(k.creature)}</li>`).join("")}</ul>` : ""}
           ${s.cliffhanger ? `<h4>Where we left off</h4><div class="cliff">${hl(s.cliffhanger)}</div>` : ""}

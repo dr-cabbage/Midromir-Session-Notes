@@ -1,0 +1,477 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session Review</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%92%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>
+:root {
+  --bg: #f4efe4; --panel: #fbf8f1; --panel-2: #efe8d8; --line: #dcd2bc;
+  --ink: #221c2b; --ink-2: #4f4659; --ink-3: #857b8c;
+  --accent: #2f6f73; --accent-ink: #fff; --ember: #b4532a; --ember-soft: #f3dccf;
+  --good: #3d7a4a; --bad: #a23b3b; --bad-soft: #f4dada; --warn-soft: #f6ecd0;
+  --serif: Georgia, "Times New Roman", serif;
+  --sans: -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15131b; --panel: #1d1a25; --panel-2: #25212f; --line: #362f42;
+    --ink: #ece6f2; --ink-2: #b9b0c4; --ink-3: #847b95;
+    --accent: #6cc0bf; --accent-ink: #0f1a1a; --ember: #e58a5c; --ember-soft: #3d2519;
+    --good: #7cc48a; --bad: #e77f7f; --bad-soft: #3a2024; --warn-soft: #3a3220;
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 15px/1.5 var(--sans); }
+button, input, textarea, select { font: inherit; color: inherit; }
+
+header {
+  position: sticky; top: 0; z-index: 10; background: var(--panel); border-bottom: 1px solid var(--line);
+  padding: 10px 16px; display: flex; flex-wrap: wrap; gap: 10px; align-items: center;
+}
+header h1 { font: 700 20px var(--serif); margin: 0; }
+header .sub { color: var(--ink-3); font-size: 13px; }
+.grow { flex: 1; }
+.btn {
+  border: 1px solid var(--line); background: var(--panel); border-radius: 8px; padding: 7px 13px;
+  cursor: pointer; font-weight: 600; white-space: nowrap;
+}
+.btn:hover:not(:disabled) { border-color: var(--ink-3); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.ember { background: var(--ember); border-color: var(--ember); color: #fff; }
+.btn.small { padding: 3px 9px; font-size: 13px; border-radius: 6px; }
+label.inline { display: inline-flex; gap: 6px; align-items: center; color: var(--ink-2); font-size: 13px; }
+input[type=date] { border: 1px solid var(--line); background: var(--panel-2); border-radius: 6px; padding: 4px 6px; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 20px; padding: 20px 16px 80px; max-width: 1400px; margin: 0 auto; }
+@media (max-width: 980px) { .layout { grid-template-columns: 1fr; } }
+
+.section { margin-bottom: 26px; }
+.section > h2 {
+  font: 600 12px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3);
+  margin: 0 0 8px; display: flex; align-items: center; gap: 8px;
+}
+.section > h2 .count { background: var(--panel-2); border-radius: 999px; padding: 0 7px; letter-spacing: 0; }
+.hint { color: var(--ink-3); font-size: 13px; margin: -4px 0 8px; }
+
+.field {
+  width: 100%; border: 1px solid var(--line); background: var(--panel); border-radius: 8px;
+  padding: 8px 10px; resize: vertical;
+}
+.field:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+.title-field { font: 700 26px var(--serif); }
+
+.item {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; align-items: start;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 8px; margin-bottom: 6px;
+}
+.item textarea, .item input.field { border-color: transparent; background: transparent; padding: 4px 6px; }
+.item textarea:hover, .item input.field:hover { border-color: var(--line); }
+.item .actions { display: flex; gap: 4px; }
+.item.cut { background: var(--bad-soft); border-color: color-mix(in srgb, var(--bad) 40%, transparent); }
+.item.cut textarea, .item.cut input, .item.cut .head { text-decoration: line-through; opacity: .6; }
+.cut-btn { color: var(--bad); }
+.item.cut .cut-btn { color: var(--good); }
+
+.ent .head { font-weight: 700; padding: 2px 6px; display: flex; gap: 8px; flex-wrap: wrap; align-items: baseline; }
+.ent .head small { font-weight: 400; color: var(--ink-3); }
+.ent details { padding: 0 6px; }
+.ent details summary { cursor: pointer; color: var(--accent); font-size: 13px; }
+.kv { display: grid; grid-template-columns: 110px 1fr; gap: 4px 8px; margin: 6px 0; align-items: center; }
+.kv label { color: var(--ink-3); font-size: 13px; text-align: right; }
+.kv .field { padding: 4px 8px; border-color: var(--line) !important; }
+
+.uncertain .item { background: var(--warn-soft); }
+.yn { display: flex; gap: 4px; flex-wrap: wrap; }
+.item.answered { opacity: .55; }
+
+aside { display: grid; gap: 16px; align-content: start; position: sticky; top: 70px; max-height: calc(100vh - 90px); overflow: auto; }
+@media (max-width: 980px) { aside { position: static; max-height: none; } }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px; }
+.card h3 { margin: 0 0 8px; font: 700 17px var(--serif); }
+.pending { margin: 8px 0 0; padding: 0; list-style: none; font-size: 13px; }
+.pending li { display: flex; gap: 6px; padding: 4px 0; border-top: 1px solid var(--line); align-items: flex-start; }
+.pending li span { flex: 1; }
+.pending li.cutlist span { color: var(--bad); }
+.x { border: 0; background: none; cursor: pointer; color: var(--ink-3); padding: 0 4px; font-size: 16px; line-height: 1; }
+.x:hover { color: var(--bad); }
+
+.transcript { font: 12.5px/1.5 ui-monospace, Consolas, monospace; max-height: 420px; overflow: auto; white-space: pre-wrap; background: var(--panel-2); border-radius: 8px; padding: 8px; }
+.transcript mark { background: color-mix(in srgb, var(--ember) 40%, transparent); color: inherit; }
+.muted { color: var(--ink-3); }
+
+#toast {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--ink); color: var(--bg);
+  padding: 10px 16px; border-radius: 10px; max-width: min(640px, 92vw); white-space: pre-line; display: none; z-index: 30;
+  box-shadow: 0 6px 24px rgb(0 0 0 / .25);
+}
+#toast.err { background: var(--bad); color: #fff; }
+.overlay {
+  position: fixed; inset: 0; background: color-mix(in srgb, var(--bg) 70%, transparent); display: none;
+  place-items: center; z-index: 20; backdrop-filter: blur(2px);
+}
+.overlay.on { display: grid; }
+.overlay .card { text-align: center; max-width: 420px; }
+.spinner { width: 34px; height: 34px; border: 3px solid var(--line); border-top-color: var(--ember); border-radius: 50%; animation: spin 1s linear infinite; margin: 6px auto 12px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.empty { padding: 30px; text-align: center; color: var(--ink-3); border: 1px dashed var(--line); border-radius: 12px; }
+.status-pill { font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); }
+.status-pill.ok { background: color-mix(in srgb, var(--good) 20%, transparent); color: var(--good); }
+</style>
+</head>
+<body>
+<header>
+  <div>
+    <h1 id="h-title">Session review</h1>
+    <div class="sub" id="h-sub">Loading…</div>
+  </div>
+  <span class="status-pill" id="posted-pill" hidden>Posted</span>
+  <div class="grow"></div>
+  <label class="inline">Session date <input type="date" id="date"></label>
+  <button class="btn" id="b-save" title="Save your edits without posting">Save draft</button>
+  <button class="btn ember" id="b-regen" title="Have Claude rewrite the notes using your cuts and corrections">↻ Regenerate</button>
+  <button class="btn primary" id="b-post" title="Add these notes to the campaign data">Post to campaign</button>
+  <button class="btn primary" id="b-push" disabled title="Commit and push to GitHub Pages">Commit &amp; push</button>
+  <button class="btn" id="b-quit">Close</button>
+</header>
+
+<div class="layout">
+  <main id="editor"></main>
+  <aside>
+    <div class="card">
+      <h3>Tell Claude what to fix</h3>
+      <textarea class="field" id="note" rows="5" placeholder="e.g. We never actually fought the bartender, that was a joke. Grimbold's hat is named Gerald. Make the dragon fight funnier."></textarea>
+      <ul class="pending" id="pending"></ul>
+      <p class="muted" style="font-size:13px;margin:8px 0 0">Cut items (✕) and these notes are sent when you hit <b>Regenerate</b>. Claude remembers them for this session.</p>
+    </div>
+    <div class="card" id="memory-card" hidden>
+      <h3>Claude remembers</h3>
+      <ul class="pending" id="memory"></ul>
+    </div>
+    <div class="card">
+      <h3>Check the transcript</h3>
+      <input class="field" id="tsearch" type="search" placeholder="Search what was actually said…">
+      <p class="muted" id="tcount" style="font-size:13px;margin:6px 0"></p>
+      <div class="transcript" id="transcript"></div>
+    </div>
+  </aside>
+</div>
+
+<div class="overlay" id="overlay"><div class="card"><div class="spinner"></div><b id="ov-title">Rewriting the notes…</b><p class="muted" id="ov-sub" style="margin:6px 0 0">This usually takes a minute or two.</p></div></div>
+<div id="toast" role="status"></div>
+
+<script>
+(() => {
+  "use strict";
+  const TOKEN = "__TOKEN__";
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+  let S = null;            // server state
+  let draft = null;        // working copy
+  let cuts = new Set();    // paths of cut items, e.g. "session.recap.2"
+  let answers = {};        // uncertain index -> "yes" | "no"
+  let dirty = false;
+
+  // ---------- api ----------
+  async function api(path, body) {
+    const r = await fetch(path, {
+      method: body === undefined ? "GET" : "POST",
+      headers: { "Content-Type": "application/json", "X-Token": TOKEN },
+      body: body === undefined ? undefined : JSON.stringify(body),
+    });
+    if (!r.ok) throw new Error(`${r.status} ${await r.text()}`);
+    return r.json();
+  }
+  function toast(msg, err = false, ms = 4500) {
+    const t = $("toast");
+    t.textContent = msg; t.className = err ? "err" : ""; t.style.display = "block";
+    clearTimeout(toast._t); toast._t = setTimeout(() => (t.style.display = "none"), ms);
+  }
+  function busy(on, title, sub) {
+    $("overlay").classList.toggle("on", on);
+    if (title) $("ov-title").textContent = title;
+    if (sub !== undefined) $("ov-sub").textContent = sub;
+  }
+
+  // ---------- paths ----------
+  const get = (obj, path) => path.split(".").reduce((o, k) => (o == null ? o : o[k]), obj);
+  function set(obj, path, val) {
+    const keys = path.split("."); const last = keys.pop();
+    const target = keys.reduce((o, k) => (o[k] ??= {}), obj);
+    target[last] = val;
+  }
+  function cleanDraft() {
+    const d = JSON.parse(JSON.stringify(draft));
+    const byList = {};
+    for (const p of cuts) {
+      const i = p.lastIndexOf("."); (byList[p.slice(0, i)] ??= []).push(+p.slice(i + 1));
+    }
+    for (const [list, idxs] of Object.entries(byList)) {
+      const arr = get(d, list);
+      if (Array.isArray(arr)) set(d, list, arr.filter((_, i) => !idxs.includes(i)));
+    }
+    return d;
+  }
+
+  // ---------- section definitions ----------
+  const TEXT_LISTS = [
+    ["session.recap", "Recap", "The story. Cut paragraphs that didn't happen, or edit them directly.", 1],
+    ["session.highlights", "Highlights", "", 1],
+    ["session.decisions", "Big decisions", "", 1],
+    ["session.table_talk", "Table talk (not canon)", "Funny out-of-character moments. They show on the site as table talk.", 1],
+  ];
+  const ENTITY_LISTS = [
+    ["party_updates", "Party", i => i.name, i => [i.level && `level ${i.level}`, i.status].filter(Boolean).join(" · "), "note",
+      ["name", "level", "status"]],
+    ["npcs", "NPCs", i => i.name, i => [i.role, i.disposition, i.status].filter(Boolean).join(" · "), "note",
+      ["name", "role", "disposition", "status", "location", "description"]],
+    ["locations", "Places", i => i.name, () => "", "note", ["name", "description"]],
+    ["quests", "Quests", i => i.title, i => i.action, "note", ["title", "action", "giver", "description"]],
+    ["mysteries", "Mysteries", i => i.title, i => i.action, "clue", ["title", "action", "description", "resolution"]],
+    ["loot", "Loot", i => i.item, i => i.holder ? "→ " + i.holder : "", "description", ["item", "holder"]],
+    ["kills", "Kills", i => `${i.character}: ${i.count}× ${i.creature}`, () => "", null, ["character", "creature", "count"]],
+    ["quotes", "Quotes", i => i.speaker, () => "", "text", ["speaker"]],
+  ];
+  const ENUMS = {
+    disposition: ["", "ally", "friendly", "neutral", "suspicious", "hostile", "unknown"],
+    "quests.action": ["start", "update", "complete", "fail"],
+    "mysteries.action": ["open", "clue", "resolve"],
+  };
+
+  function describe(path) {
+    const i = path.lastIndexOf("."); const list = path.slice(0, i);
+    const val = get(draft, path);
+    const t = TEXT_LISTS.find(x => x[0] === list);
+    if (t) return `${t[1]}: "${String(val).slice(0, 220)}"`;
+    const e = ENTITY_LISTS.find(x => x[0] === list);
+    if (e) {
+      const extra = e[4] && val[e[4]] ? ` — ${String(val[e[4]]).slice(0, 160)}` : "";
+      return `${e[1]}: ${e[2](val)}${extra}`;
+    }
+    return path;
+  }
+
+  // ---------- render ----------
+  function autoGrow(el) { el.style.height = "auto"; el.style.height = el.scrollHeight + 2 + "px"; }
+  const cutBtn = p => `<button class="btn small cut-btn" data-cut="${p}" title="Cut / restore">${cuts.has(p) ? "↺ Keep" : "✕ Cut"}</button>`;
+
+  function render() {
+    const ed = $("editor");
+    if (!draft) {
+      ed.innerHTML = `<div class="empty">No draft yet for this session.<br><br><button class="btn ember" id="b-first">Write the notes</button></div>`;
+      $("b-first").onclick = () => regenerate(true);
+      return;
+    }
+    const s = draft.session ||= {};
+    let h = `
+      <div class="section"><h2>Title</h2><input class="field title-field" data-path="session.title" value="${esc(s.title)}"></div>
+      <div class="section"><h2>Teaser</h2><textarea class="field" rows="1" data-path="session.summary">${esc(s.summary)}</textarea></div>`;
+
+    if ((s.uncertain || []).length) {
+      h += `<div class="section uncertain"><h2>Claude wasn't sure about <span class="count">${s.uncertain.length}</span></h2>
+        <p class="hint">These were left out. Answer them and hit Regenerate.</p>`;
+      s.uncertain.forEach((q, i) => {
+        const a = answers[i];
+        h += `<div class="item ${a ? "answered" : ""}"><div style="padding:4px 6px">${esc(q)}${a ? ` <b>→ ${a === "yes" ? "it happened" : "didn't happen"}</b>` : ""}</div>
+          <div class="yn"><button class="btn small" data-ans="${i}" data-v="yes">It happened</button><button class="btn small" data-ans="${i}" data-v="no">Didn't happen</button></div></div>`;
+      });
+      h += `</div>`;
+    }
+
+    for (const [path, label, hint, rows] of TEXT_LISTS) {
+      const arr = get(draft, path) || [];
+      if (!arr.length && path === "session.decisions") continue;
+      h += `<div class="section"><h2>${label} <span class="count">${arr.length}</span></h2>${hint ? `<p class="hint">${hint}</p>` : ""}`;
+      arr.forEach((txt, i) => {
+        const p = `${path}.${i}`;
+        h += `<div class="item ${cuts.has(p) ? "cut" : ""}"><textarea class="field" rows="${rows}" data-path="${p}">${esc(txt)}</textarea><div class="actions">${cutBtn(p)}</div></div>`;
+      });
+      h += `<button class="btn small" data-add="${path}">+ Add</button></div>`;
+      if (path === "session.recap") {
+        h += `<div class="section"><h2>Where we left off</h2><textarea class="field" rows="1" data-path="session.cliffhanger">${esc(s.cliffhanger)}</textarea></div>`;
+      }
+    }
+
+    for (const [list, label, name, sub, mainField, fields] of ENTITY_LISTS) {
+      const arr = draft[list] || [];
+      if (!arr.length) continue;
+      h += `<div class="section"><h2>${label} <span class="count">${arr.length}</span></h2>`;
+      arr.forEach((it, i) => {
+        const p = `${list}.${i}`;
+        const kv = fields.map(f => {
+          const fp = `${p}.${f}`; const v = it[f] ?? "";
+          const opts = ENUMS[`${list}.${f}`] || ENUMS[f];
+          const input = opts
+            ? `<select class="field" data-path="${fp}">${opts.map(o => `<option ${o === v ? "selected" : ""}>${o}</option>`).join("")}</select>`
+            : `<input class="field" data-path="${fp}" ${f === "count" || f === "level" ? 'type="number" min="0"' : ""} value="${esc(v)}">`;
+          return `<label>${f}</label>${input}`;
+        }).join("");
+        h += `<div class="item ent ${cuts.has(p) ? "cut" : ""}"><div>
+            <div class="head">${esc(name(it) || "(unnamed)")} <small>${esc(sub(it) || "")}</small></div>
+            ${mainField ? `<textarea class="field" rows="1" data-path="${p}.${mainField}">${esc(it[mainField])}</textarea>` : ""}
+            <details><summary>Edit details</summary><div class="kv">${kv}</div></details>
+          </div><div class="actions">${cutBtn(p)}</div></div>`;
+      });
+      h += `</div>`;
+    }
+    ed.innerHTML = h;
+    ed.querySelectorAll("textarea").forEach(autoGrow);
+  }
+
+  function renderSide() {
+    const pend = $("pending");
+    const items = [...cuts].map(p => `<li class="cutlist"><span>✕ ${esc(describe(p))}</span><button class="x" data-uncut="${p}" title="Restore">×</button></li>`);
+    Object.entries(answers).forEach(([i, v]) => items.push(`<li><span>${v === "yes" ? "✓" : "✕"} ${esc(draft.session.uncertain[i])}</span><button class="x" data-unans="${i}">×</button></li>`));
+    pend.innerHTML = items.join("");
+
+    const fb = S.feedback || { removed: [], notes: [] };
+    const mem = [
+      ...fb.removed.map((r, i) => `<li class="cutlist"><span>✕ ${esc(r)}</span><button class="x" data-forget="removed" data-i="${i}" title="Forget">×</button></li>`),
+      ...fb.notes.map((n, i) => `<li><span>${esc(n)}</span><button class="x" data-forget="notes" data-i="${i}" title="Forget">×</button></li>`),
+    ];
+    $("memory-card").hidden = !mem.length;
+    $("memory").innerHTML = mem.join("");
+  }
+
+  function renderTranscript() {
+    const q = $("tsearch").value.trim().toLowerCase();
+    const lines = (S.transcript || "").split("\n");
+    if (!S.transcript) { $("transcript").textContent = "No transcript found."; $("tcount").textContent = ""; return; }
+    if (!q) {
+      $("tcount").textContent = `${lines.length.toLocaleString()} lines. Search to check what was said.`;
+      $("transcript").textContent = lines.slice(0, 300).join("\n") + (lines.length > 300 ? "\n…" : "");
+      return;
+    }
+    const hits = lines.filter(l => l.toLowerCase().includes(q));
+    $("tcount").textContent = `${hits.length} matching line${hits.length === 1 ? "" : "s"}`;
+    const re = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "gi");
+    $("transcript").innerHTML = hits.slice(0, 400).map(l => esc(l).replace(re, m => `<mark>${m}</mark>`)).join("\n");
+  }
+
+  function renderHeader() {
+    $("h-title").textContent = `Session ${S.session}` + (draft?.session?.title ? `: ${draft.session.title}` : "");
+    $("h-sub").textContent = [S.campaign, S.model && `notes by ${S.model}`].filter(Boolean).join(" · ");
+    $("posted-pill").hidden = !S.posted;
+    $("posted-pill").textContent = S.posted ? "In campaign" : "";
+    $("b-push").disabled = !S.posted || !S.is_repo;
+    $("b-post").textContent = S.posted ? "Update campaign" : "Post to campaign";
+    $("b-post").disabled = !draft;
+    $("b-regen").disabled = !draft;
+    $("b-save").disabled = !draft;
+  }
+  function renderAll() { render(); renderSide(); renderHeader(); }
+
+  // ---------- events ----------
+  document.addEventListener("input", e => {
+    const p = e.target.dataset?.path;
+    if (!p || !draft) return;
+    let v = e.target.value;
+    if (e.target.type === "number") v = v === "" ? undefined : Number(v);
+    set(draft, p, v);
+    dirty = true;
+    if (e.target.tagName === "TEXTAREA") autoGrow(e.target);
+    if (p === "session.title") renderHeader();
+  });
+  document.addEventListener("click", async e => {
+    const t = e.target.closest("button"); if (!t) return;
+    if (t.dataset.cut) {
+      const p = t.dataset.cut;
+      cuts.has(p) ? cuts.delete(p) : cuts.add(p);
+      const item = t.closest(".item");
+      item.classList.toggle("cut", cuts.has(p));
+      t.textContent = cuts.has(p) ? "↺ Keep" : "✕ Cut";
+      renderSide();
+    } else if (t.dataset.uncut) {
+      cuts.delete(t.dataset.uncut); render(); renderSide();
+    } else if (t.dataset.add) {
+      const arr = get(draft, t.dataset.add) || [];
+      arr.push(""); set(draft, t.dataset.add, arr); render();
+      const boxes = document.querySelectorAll(`[data-path^="${t.dataset.add}."]`);
+      boxes[boxes.length - 1]?.focus();
+    } else if (t.dataset.ans) {
+      answers[t.dataset.ans] = t.dataset.v; render(); renderSide();
+    } else if (t.dataset.unans) {
+      delete answers[t.dataset.unans]; render(); renderSide();
+    } else if (t.dataset.forget) {
+      const r = await api("/api/forget", { kind: t.dataset.forget, index: +t.dataset.i });
+      S.feedback = r.feedback; renderSide();
+    }
+  });
+  $("tsearch").addEventListener("input", renderTranscript);
+
+  function collectNote() {
+    const parts = [];
+    const typed = $("note").value.trim();
+    if (typed) parts.push(typed);
+    Object.entries(answers).forEach(([i, v]) => {
+      const q = draft.session.uncertain[i];
+      parts.push(v === "yes" ? `Confirmed, this DID happen in-game: ${q}` : `This did NOT happen in-game: ${q}`);
+    });
+    return parts.join("\n");
+  }
+
+  async function regenerate(first = false) {
+    const note = first ? "" : collectNote();
+    const removed = first ? [] : [...cuts].map(describe);
+    if (!first && !note && !removed.length && !confirm("You haven't cut anything or added notes. Regenerate anyway?")) return;
+    busy(true, first ? "Writing the notes…" : "Rewriting the notes with your feedback…", "This usually takes a minute or two.");
+    try {
+      const body = { draft: first ? null : cleanDraft(), removed, note };
+      if (!first) delete body.draft.session?.uncertain;
+      const r = await api("/api/regenerate", body);
+      if (!r.ok) throw new Error(r.error);
+      draft = r.draft; S.feedback = r.feedback; S.draft = r.draft;
+      cuts = new Set(); answers = {}; $("note").value = ""; dirty = false;
+      renderAll();
+      window.scrollTo({ top: 0 });
+      toast("New draft ready.");
+    } catch (err) {
+      toast("Regenerate failed:\n" + err.message, true, 9000);
+    } finally { busy(false); }
+  }
+
+  $("b-regen").onclick = () => regenerate(false);
+  $("b-save").onclick = async () => {
+    await api("/api/save", { draft: cleanDraft(), date: $("date").value });
+    dirty = false; toast("Draft saved (cut items removed).");
+    draft = cleanDraft(); cuts = new Set(); renderAll();
+  };
+  $("b-post").onclick = async () => {
+    if (cuts.size && !confirm(`Post without the ${cuts.size} cut item(s)? (Cut items are simply dropped. Use Regenerate if other parts depend on them.)`)) return;
+    busy(true, "Adding to the campaign…", "");
+    try {
+      const r = await api("/api/post", { draft: cleanDraft(), date: $("date").value, commit: false });
+      draft = cleanDraft(); cuts = new Set(); dirty = false;
+      Object.assign(S, await api("/api/state"));
+      renderAll();
+      toast(r.log.filter(Boolean).join("\n") + (S.is_repo ? "\nNow hit Commit & push to publish." : ""), !r.ok, 7000);
+    } catch (err) { toast(err.message, true); } finally { busy(false); }
+  };
+  $("b-push").onclick = async () => {
+    busy(true, "Committing and pushing…", "");
+    try {
+      const r = await api("/api/commit", { push: true });
+      toast(r.log.join("\n"), !r.ok, 9000);
+    } catch (err) { toast(err.message, true); } finally { busy(false); }
+  };
+  $("b-quit").onclick = async () => {
+    if (dirty && !confirm("You have unsaved edits. Close anyway?")) return;
+    await api("/api/quit", {});
+    document.body.innerHTML = `<div class="empty" style="margin:60px auto;max-width:420px">All done. You can close this tab.</div>`;
+  };
+  window.addEventListener("beforeunload", e => { if (dirty) { e.preventDefault(); e.returnValue = ""; } });
+
+  api("/api/state").then(st => {
+    S = st; draft = st.draft ? JSON.parse(JSON.stringify(st.draft)) : null;
+    $("date").value = st.date;
+    renderAll(); renderTranscript();
+  }).catch(err => toast("Couldn't load: " + err.message, true, 20000));
+})();
+</script>
+</body>
+</html>

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """The Scribe: record a D&D session, write the notes, update the website.
 
+  python scribe.py process <file|folder|zip> transcribe, write notes, open the review window
+  python scribe.py review --session 7        reopen the review window for a session
   python scribe.py record                    record from your PC, then process it
-  python scribe.py process <file|folder|zip> transcribe + write notes + publish
-  python scribe.py notes --session 7         rewrite notes from a saved transcript
-  python scribe.py apply --session 7         publish a draft you edited by hand
+  python scribe.py notes --session 7         write fresh notes from a saved transcript
+  python scribe.py apply --session 7         post a draft without the review window
   python scribe.py devices                   list microphones / speakers
   python scribe.py serve                     preview the website locally
 
@@ -15,22 +16,14 @@ from __future__ import annotations
 import argparse
 import functools
 import http.server
-import json
-import os
 import sys
 import webbrowser
 from pathlib import Path
 
-from chronicle.config import DATA_FILE, DRAFTS_DIR, ROOT, TRANSCRIPTS_DIR, load_config
-from chronicle import merge
+from chronicle import merge, pipeline
+from chronicle.config import DATA_FILE, load_config
 
-
-def transcript_path(n: int) -> Path:
-    return TRANSCRIPTS_DIR / f"session-{n:02d}.txt"
-
-
-def draft_path(n: int) -> Path:
-    return DRAFTS_DIR / f"session-{n:02d}.json"
+TEXT_EXTS = {".txt", ".vtt", ".srt", ".md"}
 
 
 def pick_session_number(args) -> int:
@@ -39,75 +32,46 @@ def pick_session_number(args) -> int:
     return merge.next_session_number(merge.load_campaign(DATA_FILE))
 
 
-# --------------------------------------------------------------------------- #
-def step_transcribe(source: Path, n: int, cfg: dict, force: bool) -> Path:
+def step_transcribe(source: Path, n: int, cfg: dict, force: bool) -> None:
     from chronicle.transcriber import transcribe
 
-    out = transcript_path(n)
+    out = pipeline.transcript_path(n)
     if out.exists() and not force:
         print(f"Transcript for session {n} already exists, reusing it (use --retranscribe to redo).")
-        return out
-    return transcribe(source, cfg, out)
+        return
+    transcribe(source, cfg, out)
 
 
-def step_notes(n: int, cfg: dict) -> Path:
-    from chronicle.notewriter import write_notes
-
-    tpath = transcript_path(n)
-    if not tpath.exists():
-        sys.exit(f"No transcript at {tpath}. Run 'process' first.")
-    campaign = merge.load_campaign(DATA_FILE)
-    notes = write_notes(campaign, tpath.read_text(encoding="utf-8"), n, cfg)
-    dpath = draft_path(n)
-    dpath.parent.mkdir(parents=True, exist_ok=True)
-    dpath.write_text(json.dumps(notes, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Draft notes saved: {dpath}")
-    return dpath
-
-
-def review(dpath: Path) -> bool:
-    title = json.loads(dpath.read_text(encoding="utf-8")).get("session", {}).get("title", "")
-    print(f"\nDraft ready: \"{title}\"")
-    print(f"Open {dpath.relative_to(ROOT)} to read or fix anything (names, events).")
-    if sys.platform.startswith("win"):
-        try:
-            os.startfile(dpath)  # opens in your default JSON/text editor
-        except OSError:
-            pass
-    answer = input("Save your edits, then press Enter to publish (or type q to stop here): ")
-    if answer.strip().lower().startswith("q"):
-        print(f"Stopped. Publish later with: python scribe.py apply --session {dpath.stem.split('-')[-1]}")
-        return False
-    return True
-
-
-def step_apply(n: int, cfg: dict, date: str | None, source: str | None) -> None:
-    from chronicle.publisher import publish, pull
-
-    dpath = draft_path(n)
-    if not dpath.exists():
-        sys.exit(f"No draft at {dpath}.")
+def step_generate(n: int, cfg: dict) -> None:
+    from chronicle.notewriter import NotesError
     try:
-        notes = json.loads(dpath.read_text(encoding="utf-8"))
-    except json.JSONDecodeError as exc:
-        sys.exit(f"The draft has a JSON typo: {exc}. Fix it and run: python scribe.py apply --session {n}")
+        pipeline.generate(n, cfg)
+    except (NotesError, FileNotFoundError) as exc:
+        sys.exit(str(exc))
+    print(f"Draft notes saved: {pipeline.draft_path(n)}")
 
-    pull()
-    campaign = merge.load_campaign(DATA_FILE)
-    existing = next((s for s in campaign["sessions"] if s["number"] == n), None)
-    if existing and not date:
-        date = existing.get("date")
-    if existing and not source:
-        source = existing.get("source")
-    merge.apply_session(campaign, notes, n, date=date, source=source)
-    merge.save_campaign(DATA_FILE, campaign)
-    title = notes.get("session", {}).get("title", "")
-    print(f"Updated {DATA_FILE.relative_to(ROOT)} with session {n}.")
 
-    paths = [DATA_FILE, dpath]
-    if cfg.get("keep_transcripts_in_git"):
-        paths.append(transcript_path(n))
-    publish(f"Session {n}: {title}", paths, push=cfg.get("auto_push", True))
+def step_review(n: int, cfg: dict, args) -> None:
+    """Open the browser review window, or publish straight away with --no-review."""
+    date = getattr(args, "date", None)
+    source = getattr(args, "source_name", None)
+    if cfg.get("review_before_publish", True) and not getattr(args, "no_review", False):
+        from chronicle.reviewer import run
+        run(n, cfg, date=date, source=source)
+    else:
+        post_now(n, cfg, date, source)
+
+
+def post_now(n: int, cfg: dict, date: str | None, source: str | None) -> None:
+    from chronicle import publisher
+    pipeline.save_meta(n, date=date, source=source)
+    publisher.pull()
+    try:
+        title = pipeline.apply_draft(n, date=date, source=source)
+    except FileNotFoundError as exc:
+        sys.exit(str(exc))
+    publisher.publish(f"Session {n}: {title}", pipeline.publish_paths(n, cfg),
+                      push_after=cfg.get("auto_push", True))
 
 
 # --------------------------------------------------------------------------- #
@@ -117,13 +81,13 @@ def cmd_process(args, cfg):
         sys.exit(f"Can't find {source}")
     n = pick_session_number(args)
     print(f"== Session {n} ==")
-    is_text = source.suffix.lower() in {".txt", ".vtt", ".srt", ".md"}
-    step_transcribe(source, n, cfg, args.retranscribe or is_text)
-    dpath = step_notes(n, cfg)
-    if cfg.get("review_before_publish", True) and not args.no_review:
-        if not review(dpath):
-            return
-    step_apply(n, cfg, args.date, source.name)
+    step_transcribe(source, n, cfg, args.retranscribe or source.suffix.lower() in TEXT_EXTS)
+    if pipeline.load_draft(n) and not args.fresh:
+        print("A draft for this session already exists; opening it (use --fresh to write new notes).")
+    else:
+        step_generate(n, cfg)
+    args.source_name = source.name
+    step_review(n, cfg, args)
 
 
 def cmd_record(args, cfg):
@@ -131,14 +95,16 @@ def cmd_record(args, cfg):
 
     n = pick_session_number(args)
     folder = record(cfg, f"session-{n:02d}", args.mic, args.speaker)
-    if args.no_process:
-        print(f"Process later with: python scribe.py process \"{folder}\" --session {n}")
-        return
-    if input("Write the notes now? [Y/n] ").strip().lower().startswith("n"):
-        print(f"Process later with: python scribe.py process \"{folder}\" --session {n}")
+    later = f'Process later with: python scribe.py process "{folder}" --session {n}'
+    if args.no_process or input("Write the notes now? [Y/n] ").strip().lower().startswith("n"):
+        print(later)
         return
     args.source, args.session = str(folder), n
     cmd_process(args, cfg)
+
+
+def cmd_review(args, cfg):
+    step_review(args.session, cfg, args)
 
 
 def cmd_transcribe(args, cfg):
@@ -147,15 +113,12 @@ def cmd_transcribe(args, cfg):
 
 
 def cmd_notes(args, cfg):
-    dpath = step_notes(args.session, cfg)
-    if cfg.get("review_before_publish", True) and not args.no_review:
-        if not review(dpath):
-            return
-    step_apply(args.session, cfg, args.date, None)
+    step_generate(args.session, cfg)
+    step_review(args.session, cfg, args)
 
 
 def cmd_apply(args, cfg):
-    step_apply(args.session, cfg, args.date, None)
+    post_now(args.session, cfg, args.date, None)
 
 
 def cmd_devices(args, cfg):
@@ -164,6 +127,7 @@ def cmd_devices(args, cfg):
 
 
 def cmd_serve(args, cfg):
+    from chronicle.config import ROOT
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(ROOT))
     url = f"http://localhost:{args.port}/"
     print(f"Previewing at {url}  (Ctrl+C to stop)")
@@ -179,11 +143,12 @@ def main():
         sp.add_argument("--session", type=int, required=needs_session,
                         help="session number (default: next one)")
         sp.add_argument("--date", help="session date YYYY-MM-DD (default: today)")
-        sp.add_argument("--no-review", action="store_true", help="publish without pausing to review")
+        sp.add_argument("--no-review", action="store_true", help="skip the review window and publish right away")
 
-    sp = sub.add_parser("process", help="transcribe a recording, write notes, publish")
+    sp = sub.add_parser("process", help="transcribe a recording, write notes, review, publish")
     sp.add_argument("source", help="audio/video file, Craig .zip, folder of tracks, or a .txt transcript")
     sp.add_argument("--retranscribe", action="store_true", help="ignore a saved transcript")
+    sp.add_argument("--fresh", action="store_true", help="ignore an existing draft and write new notes")
     common(sp)
     sp.set_defaults(func=cmd_process)
 
@@ -191,20 +156,23 @@ def main():
     sp.add_argument("--mic", help="part of the microphone name (default: system default)")
     sp.add_argument("--speaker", help="part of the speaker/headset name (default: system default)")
     sp.add_argument("--no-process", action="store_true", help="just record")
-    sp.add_argument("--retranscribe", action="store_true", help=argparse.SUPPRESS)
     common(sp)
-    sp.set_defaults(func=cmd_record)
+    sp.set_defaults(func=cmd_record, retranscribe=False, fresh=False)
+
+    sp = sub.add_parser("review", help="open the review window for a session")
+    common(sp, needs_session=True)
+    sp.set_defaults(func=cmd_review)
 
     sp = sub.add_parser("transcribe", help="only make the transcript")
     sp.add_argument("source")
     sp.add_argument("--session", type=int)
     sp.set_defaults(func=cmd_transcribe)
 
-    sp = sub.add_parser("notes", help="rewrite notes from a saved transcript")
+    sp = sub.add_parser("notes", help="write fresh notes from a saved transcript, then review")
     common(sp, needs_session=True)
     sp.set_defaults(func=cmd_notes)
 
-    sp = sub.add_parser("apply", help="publish a (hand-edited) draft")
+    sp = sub.add_parser("apply", help="post a draft without the review window")
     sp.add_argument("--session", type=int, required=True)
     sp.add_argument("--date")
     sp.set_defaults(func=cmd_apply)

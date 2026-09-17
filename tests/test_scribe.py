@@ -184,10 +184,28 @@ def test_notewriter_with_fake_client():
     import os
     os.environ.setdefault("ANTHROPIC_API_KEY", "test")
     notes = notewriter.write_notes(data, "transcript", 2, {"claude_model": "claude-sonnet-5"})
-    assert notes is S2
+    assert notes == S2
     assert captured["tool_choice"]["name"] == notewriter.TOOL_NAME
     assert captured["model"] == "claude-sonnet-5"
+    content = captured["messages"][0]["content"]
+    assert content[0]["cache_control"]["type"] == "ephemeral" and "Write the notes" in content[1]["text"]
+
+    notewriter.write_notes(data, "transcript", 2, {}, revision={
+        "draft": {"session": {"title": "x"}}, "removed": ["Recap: the bartender fight"], "notes": ["Hat is named Gerald"]})
+    rev = captured["messages"][0]["content"][1]["text"]
+    assert "the bartender fight" in rev and "Gerald" in rev and "reviewed_draft" in rev
     print("notewriter: ok")
+
+
+def test_repair_stringified_notes():
+    leaked = json.dumps(S1["session"]) + ', "npcs": ' + json.dumps(S1["npcs"]) + ', "quotes": ' + json.dumps(S1["quotes"]) + "\n}"
+    fixed = notewriter.repair_notes({"session": leaked})
+    assert fixed["session"]["title"] == S1["session"]["title"] and fixed["npcs"] == S1["npcs"]
+    assert notewriter.notes_problems(fixed) == []
+    assert notewriter.repair_notes({"session": json.dumps(S1["session"]), "npcs": json.dumps(S1["npcs"])})["npcs"] == S1["npcs"]
+    assert notewriter.notes_problems({"session": "garbage"}) != []
+    assert notewriter.repair_notes(S1) == S1
+    print("repair: ok")
 
 
 def build_sample():
@@ -204,5 +222,6 @@ if __name__ == "__main__":
     test_merge_and_rerun()
     test_transcriber_helpers()
     test_notewriter_with_fake_client()
+    test_repair_stringified_notes()
     build_sample()
     print("all tests passed")

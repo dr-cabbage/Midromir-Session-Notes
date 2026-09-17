@@ -26,7 +26,18 @@ EMPTY_CAMPAIGN = {
 
 def load_campaign(path: Path) -> dict:
     if path.exists():
-        data = json.loads(path.read_text(encoding="utf-8"))
+        text = path.read_text(encoding="utf-8-sig")
+        try:
+            data = json.loads(text)
+        except json.JSONDecodeError as exc:
+            lines = text.splitlines()
+            lo, hi = max(0, exc.lineno - 4), min(len(lines), exc.lineno + 1)
+            snippet = "\n".join(f"{i + 1:>5} | {lines[i]}" for i in range(lo, hi))
+            raise SystemExit(
+                f"\n{path.name} has a typo on line {exc.lineno}, column {exc.colno}: {exc.msg}\n\n{snippet}\n\n"
+                "Most often this is a comma after the last item in a list, e.g.  },  right before  ]\n"
+                "or a missing comma between two entries. Fix it, save, and run the command again."
+            ) from None
     else:
         data = {}
     for k, v in EMPTY_CAMPAIGN.items():
@@ -140,6 +151,7 @@ def apply_session(data: dict, notes: dict, n: int, date: str | None = None,
         "decisions": s.get("decisions", []),
         "cliffhanger": s.get("cliffhanger", ""),
         "in_game_days": s.get("in_game_days", ""),
+        "table_talk": s.get("table_talk", []),
         "source": source or "",
     })
     data["sessions"].sort(key=lambda x: x["number"])
