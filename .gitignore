@@ -1,0 +1,18 @@
+# secrets & local settings
+.env
+config.yaml
+
+# big / private files
+recordings/
+transcripts/
+*.wav
+*.flac
+*.mp3
+*.m4a
+*.ogg
+*.zip
+
+__pycache__/
+*.pyc
+.venv/
+data/*.tmp

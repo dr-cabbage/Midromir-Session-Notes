@@ -1,0 +1,5 @@
+anthropic>=0.60
+faster-whisper>=1.1
+soundcard>=0.4.3
+numpy
+PyYAML>=6

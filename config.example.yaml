@@ -1,0 +1,46 @@
+# Copy this file to config.yaml and fill it in.
+
+# Which Claude model writes the notes. Sonnet is a good balance of quality and cost
+# (about $0.15-0.40 for a 3-4 hour session). Use claude-opus-5 for richer notes.
+claude_model: claude-sonnet-5
+
+# How the recap should read.
+notes_style: >
+  Lively and a little funny, like a party member keeping a journal.
+  Past tense. Keep it accurate.
+
+# Anything that helps Claude understand the table: who the DM is, running jokes,
+# names Whisper keeps mangling, house rules, etc.
+dm_context: |
+  The DM is Sam. Kale plays Thorn, a half-elf ranger.
+  The villain is named Vex'Ahlia (often transcribed as "vexalia").
+
+# Discord usernames (as they appear on Craig track file names) -> who they are.
+# Use "Name (Character)" so Claude can tell players and characters apart.
+speakers:
+  kingkale: Kale (Thorn)
+  samthedm: Sam (DM)
+  bigdave: Dave (Grimbold)
+  Me: Kale (Thorn)          # the built-in recorder's microphone track
+  Table: Everyone else      # the built-in recorder's speaker track
+
+whisper:
+  # tiny.en / base.en / small.en / medium.en / large-v3 / distil-large-v3
+  # Bigger = more accurate but slower. small.en is a good start on CPU;
+  # with an NVIDIA GPU try large-v3.
+  model: small.en
+  device: auto          # auto, cpu, or cuda
+  language: en
+  # Spell out fantasy names so Whisper gets them right more often.
+  initial_prompt: "Thorn, Grimbold, Vex'Ahlia, Waterdeep, Neverwinter."
+
+recording:
+  my_name: Me
+  sample_rate: 16000
+
+# Pause so you can read/fix the draft before it goes on the site.
+review_before_publish: true
+# Push to GitHub automatically after committing.
+auto_push: true
+# Transcripts stay on your PC by default (they're long and chatty).
+keep_transcripts_in_git: false

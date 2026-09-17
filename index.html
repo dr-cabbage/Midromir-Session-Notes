@@ -1,0 +1,507 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campaign Chronicle</title>
+<meta name="description" content="Session notes, characters, quests and mysteries for our D&D campaign.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9C%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4efe4;
+  --panel: #fbf8f1;
+  --panel-2: #efe8d8;
+  --line: #dcd2bc;
+  --ink: #221c2b;
+  --ink-2: #4f4659;
+  --ink-3: #857b8c;
+  --accent: #2f6f73;
+  --accent-soft: #d6e7e6;
+  --ember: #b4532a;
+  --ember-soft: #f3dccf;
+  --gold: #9a7417;
+  --good: #3d7a4a;
+  --bad: #a23b3b;
+  --shadow: 0 1px 2px rgb(40 30 20 / .06), 0 4px 16px rgb(40 30 20 / .05);
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15131b; --panel: #1d1a25; --panel-2: #25212f; --line: #342f40;
+    --ink: #ece6f2; --ink-2: #b9b0c4; --ink-3: #7f7690;
+    --accent: #6cc0bf; --accent-soft: #1f3a3c; --ember: #e58a5c; --ember-soft: #3d2519;
+    --gold: #d9b456; --good: #7cc48a; --bad: #e77f7f;
+    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 6px 20px rgb(0 0 0 / .25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15131b; --panel: #1d1a25; --panel-2: #25212f; --line: #342f40;
+  --ink: #ece6f2; --ink-2: #b9b0c4; --ink-3: #7f7690;
+  --accent: #6cc0bf; --accent-soft: #1f3a3c; --ember: #e58a5c; --ember-soft: #3d2519;
+  --gold: #d9b456; --good: #7cc48a; --bad: #e77f7f;
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 6px 20px rgb(0 0 0 / .25);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--ink);
+  font: 17px/1.6 var(--sans);
+}
+a { color: var(--accent); }
+button, input { font: inherit; color: inherit; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 0 16px; }
+
+header.hero { padding: 48px 0 20px; border-bottom: 1px solid var(--line); }
+.eyebrow { font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: var(--ember); font-weight: 600; }
+h1 { font: 700 clamp(38px, 7vw, 60px)/1.02 var(--serif); margin: 6px 0 8px; letter-spacing: -.01em; }
+.subtitle { color: var(--ink-2); font-size: 19px; margin: 0; max-width: 60ch; }
+.stats { display: flex; flex-wrap: wrap; gap: 8px 24px; margin-top: 20px; color: var(--ink-3); font-size: 15px; }
+.stats b { color: var(--ink); font-size: 22px; font-family: var(--serif); margin-right: 4px; }
+
+nav.tabs {
+  position: sticky; top: 0; z-index: 5; background: color-mix(in srgb, var(--bg) 92%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.tabbar { display: flex; gap: 4px; align-items: center; overflow-x: auto; scrollbar-width: none; padding: 8px 0; }
+.tabbar::-webkit-scrollbar { display: none; }
+.tab {
+  border: 0; background: none; padding: 7px 12px; border-radius: 999px; cursor: pointer;
+  color: var(--ink-2); white-space: nowrap; font-weight: 600; font-size: 15px;
+}
+.tab:hover { background: var(--panel-2); }
+.tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+.tab .n { opacity: .6; font-weight: 400; margin-left: 4px; }
+.spacer { flex: 1; }
+.theme-btn { border: 1px solid var(--line); background: var(--panel); border-radius: 999px; width: 36px; height: 36px; cursor: pointer; flex: none; }
+
+.toolbar { display: flex; gap: 10px; align-items: center; margin: 22px 0 14px; flex-wrap: wrap; }
+.search {
+  flex: 1; min-width: 200px; padding: 10px 14px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--panel);
+}
+.search:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  border: 1px solid var(--line); background: var(--panel); border-radius: 999px;
+  padding: 5px 12px; cursor: pointer; font-size: 14px; color: var(--ink-2);
+}
+.chip[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+
+h2.view-title { font: 600 32px/1.1 var(--serif); margin: 28px 0 0; }
+.muted { color: var(--ink-3); }
+.empty { padding: 40px 20px; text-align: center; color: var(--ink-3); border: 1px dashed var(--line); border-radius: 14px; }
+
+.card {
+  background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+  padding: 18px 20px; box-shadow: var(--shadow);
+}
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+.stack { display: grid; gap: 14px; }
+
+/* sessions */
+.session { padding: 0; overflow: hidden; }
+.session > summary {
+  list-style: none; cursor: pointer; padding: 18px 20px; display: grid;
+  grid-template-columns: 58px 1fr auto; gap: 14px; align-items: start;
+}
+.session > summary::-webkit-details-marker { display: none; }
+.snum {
+  font: 700 26px/1 var(--serif); color: var(--ember); background: var(--ember-soft);
+  border-radius: 12px; height: 54px; display: grid; place-items: center;
+}
+.snum small { display: block; font: 600 10px var(--sans); letter-spacing: .1em; text-align: center; }
+.session h3 { font: 600 25px/1.15 var(--serif); margin: 0 0 4px; }
+.session .summary { margin: 0; color: var(--ink-2); }
+.date { font-size: 13px; color: var(--ink-3); white-space: nowrap; }
+.chev { transition: transform .2s; color: var(--ink-3); display: inline-block; margin-left: 6px; }
+.session[open] .chev { transform: rotate(90deg); }
+.session-body { padding: 0 20px 22px 92px; }
+.session-body p { margin: 0 0 12px; max-width: 70ch; }
+.session-body h4 {
+  font: 600 13px var(--sans); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--ink-3); margin: 22px 0 8px;
+}
+.session-body ul { margin: 0; padding-left: 20px; }
+.session-body li { margin: 4px 0; }
+.cliff { border-left: 3px solid var(--ember); padding: 8px 14px; background: var(--panel-2); border-radius: 0 10px 10px 0; font-style: italic; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag { font-size: 13px; padding: 2px 10px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); border: 1px solid var(--line); cursor: pointer; }
+.tag:hover { border-color: var(--accent); }
+
+/* entities */
+.ent h3 { font: 600 24px/1.1 var(--serif); margin: 0; }
+.ent .role { color: var(--ink-2); margin: 2px 0 10px; font-size: 15px; }
+.ent .desc { margin: 0 0 10px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0 10px; }
+.pill { font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); text-transform: capitalize; }
+.pill.ally, .pill.friendly, .pill.active, .pill.complete, .pill.resolved { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.pill.hostile, .pill.dead, .pill.failed { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
+.pill.suspicious, .pill.open { background: color-mix(in srgb, var(--gold) 20%, transparent); color: var(--gold); }
+.log { list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid var(--line); }
+.log li { padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 15px; display: grid; grid-template-columns: 38px 1fr; gap: 8px; }
+.log li:last-child { border-bottom: 0; }
+.slink { font-weight: 600; color: var(--ember); text-decoration: none; font-size: 13px; padding-top: 2px; }
+.slink:hover { text-decoration: underline; }
+details.more > summary { cursor: pointer; color: var(--accent); font-size: 14px; font-weight: 600; margin-top: 6px; }
+
+.char-head { display: flex; gap: 14px; align-items: center; margin-bottom: 8px; }
+.sigil {
+  width: 52px; height: 52px; border-radius: 50%; flex: none; display: grid; place-items: center;
+  font: 700 22px var(--serif); color: var(--bg); background: var(--accent);
+}
+
+/* table */
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); font-weight: 600; }
+.table-wrap { overflow-x: auto; }
+
+/* tally */
+.bars { display: grid; gap: 10px; }
+.bar { display: grid; grid-template-columns: 130px 1fr 44px; gap: 12px; align-items: center; }
+.bar .track { background: var(--panel-2); height: 16px; border-radius: 999px; overflow: hidden; }
+.bar .fill { height: 100%; background: var(--ember); border-radius: 999px; }
+.bar .v { font: 700 20px var(--serif); text-align: right; }
+
+/* quotes */
+blockquote { margin: 0; font: 500 23px/1.35 var(--serif); }
+blockquote::before { content: "\201C"; color: var(--ember); }
+blockquote::after { content: "\201D"; color: var(--ember); }
+.qby { margin-top: 10px; color: var(--ink-2); font-size: 15px; }
+
+mark { background: color-mix(in srgb, var(--gold) 35%, transparent); color: inherit; border-radius: 3px; padding: 0 1px; }
+footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text-align: center; }
+
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  header.hero { padding-top: 32px; }
+  .session > summary { grid-template-columns: 46px 1fr; }
+  .session > summary .date-col { grid-column: 2; }
+  .snum { height: 46px; font-size: 22px; }
+  .session-body { padding: 0 16px 20px; }
+  .bar { grid-template-columns: 90px 1fr 36px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow" id="eyebrow">Campaign Chronicle</div>
+    <h1 id="title">Loading…</h1>
+    <p class="subtitle" id="subtitle"></p>
+    <div class="stats" id="stats"></div>
+  </div>
+</header>
+<nav class="tabs" aria-label="Sections">
+  <div class="wrap tabbar" id="tabbar" role="tablist"></div>
+</nav>
+<main class="wrap" id="main"></main>
+<footer class="wrap" id="footer"></footer>
+
+<script>
+(() => {
+  "use strict";
+
+  const params = new URLSearchParams(location.search);
+  const DATA_URL = params.get("data") || "data/campaign.json";
+
+  const VIEWS = [
+    { id: "chronicle", label: "Chronicle", count: d => d.sessions.length },
+    { id: "party", label: "Party", count: d => d.party.length },
+    { id: "npcs", label: "NPCs", count: d => d.npcs.length },
+    { id: "places", label: "Places", count: d => d.locations.length },
+    { id: "quests", label: "Quests", count: d => d.quests.length },
+    { id: "mysteries", label: "Mysteries", count: d => d.mysteries.filter(m => m.status !== "resolved").length },
+    { id: "loot", label: "Loot", count: d => d.loot.length },
+    { id: "tally", label: "Kill Tally", count: d => d.kills.reduce((a, k) => a + (k.count || 1), 0) },
+    { id: "quotes", label: "Quotes", count: d => d.quotes.length },
+  ];
+
+  let data = null;
+  const state = { view: "chronicle", q: "", filter: "all", openSession: null };
+
+  // ---------- helpers ----------
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const hl = s => {
+    const safe = esc(s);
+    if (!state.q) return safe;
+    const re = new RegExp("(" + state.q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "gi");
+    return safe.replace(re, "<mark>$1</mark>");
+  };
+  const text = obj => JSON.stringify(obj).toLowerCase();
+  const matches = obj => !state.q || text(obj).includes(state.q.toLowerCase());
+  const slink = n => n == null ? "" : `<a class="slink" href="#chronicle/${n}" data-session="${n}">S${n}</a>`;
+  const pill = (v, extra = "") => v ? `<span class="pill ${esc(String(v).toLowerCase())}">${esc(extra + v)}</span>` : "";
+  const fmtDate = iso => {
+    if (!iso) return "";
+    const d = new Date(iso + "T12:00:00");
+    return isNaN(d) ? esc(iso) : d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+  };
+  const initials = name => String(name || "?").split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase();
+  const logList = (log, limit = 3) => {
+    if (!log || !log.length) return "";
+    const items = [...log].sort((a, b) => b.session - a.session)
+      .map(e => `<li>${slink(e.session)}<span>${hl(e.text)}</span></li>`);
+    const first = items.slice(0, limit).join("");
+    const rest = items.slice(limit).join("");
+    return `<ul class="log">${first}</ul>` +
+      (rest ? `<details class="more"><summary>${items.length - limit} earlier</summary><ul class="log">${rest}</ul></details>` : "");
+  };
+  const emptyMsg = what => `<div class="empty">No ${what} yet${state.q ? " matching “" + esc(state.q) + "”" : ""}.</div>`;
+
+  function toolbar(filters, placeholder) {
+    const chips = (filters || []).map(([val, label]) =>
+      `<button class="chip" data-filter="${val}" aria-pressed="${state.filter === val}">${label}</button>`).join("");
+    return `<div class="toolbar">
+      <input class="search" type="search" id="q" placeholder="${placeholder}" value="${esc(state.q)}" aria-label="Search">
+      ${chips ? `<div class="chips">${chips}</div>` : ""}
+    </div>`;
+  }
+
+  // ---------- views ----------
+  const R = {};
+
+  R.chronicle = () => {
+    const list = [...data.sessions].sort((a, b) => b.number - a.number).filter(matches);
+    const body = list.map(s => {
+      const open = state.openSession === s.number || (state.q && list.length <= 3);
+      const involved = [
+        ...data.npcs.filter(n => (n.log || []).some(e => e.session === s.number)).map(n => n.name),
+        ...data.locations.filter(n => (n.log || []).some(e => e.session === s.number)).map(n => n.name),
+      ];
+      const sect = (label, arr) => arr && arr.length ? `<h4>${label}</h4><ul>${arr.map(x => `<li>${hl(x)}</li>`).join("")}</ul>` : "";
+      const loot = data.loot.filter(l => l.session === s.number);
+      const kills = data.kills.filter(k => k.session === s.number);
+      return `<details class="card session" id="session-${s.number}" ${open ? "open" : ""}>
+        <summary>
+          <div class="snum"><div><small>SESSION</small>${s.number}</div></div>
+          <div><h3>${hl(s.title)}</h3><p class="summary">${hl(s.summary)}</p></div>
+          <div class="date-col"><span class="date">${fmtDate(s.date)}</span><span class="chev" aria-hidden="true">›</span></div>
+        </summary>
+        <div class="session-body">
+          ${(s.recap || []).map(p => `<p>${hl(p)}</p>`).join("")}
+          ${sect("Highlights", s.highlights)}
+          ${sect("Big decisions", s.decisions)}
+          ${loot.length ? `<h4>Loot</h4><ul>${loot.map(l => `<li><b>${hl(l.item)}</b>${l.holder ? " → " + hl(l.holder) : ""}${l.description ? " — " + hl(l.description) : ""}</li>`).join("")}</ul>` : ""}
+          ${kills.length ? `<h4>Kills</h4><ul>${kills.map(k => `<li>${hl(k.character)}: ${k.count}× ${hl(k.creature)}</li>`).join("")}</ul>` : ""}
+          ${s.cliffhanger ? `<h4>Where we left off</h4><div class="cliff">${hl(s.cliffhanger)}</div>` : ""}
+          ${involved.length ? `<h4>Featuring</h4><div class="tags">${involved.map(n => `<button class="tag" data-search="${esc(n)}">${esc(n)}</button>`).join("")}</div>` : ""}
+        </div>
+      </details>`;
+    }).join("");
+    return toolbar(null, "Search every session… (a name, an item, “dragon”)") +
+      (list.length ? `<div class="stack">${body}</div>` : emptyMsg("sessions"));
+  };
+
+  R.party = () => {
+    const list = data.party.filter(matches);
+    const cards = list.map(p => {
+      const line = [p.race, p.class && (p.subclass ? `${p.class} (${p.subclass})` : p.class)].filter(Boolean).join(" · ");
+      return `<article class="card ent">
+        <div class="char-head"><div class="sigil" aria-hidden="true">${esc(initials(p.name))}</div>
+          <div><h3>${hl(p.name)}</h3><div class="role" style="margin:0">${hl(line)}${p.player ? ` <span class="muted">— played by ${hl(p.player)}</span>` : ""}</div></div>
+        </div>
+        <div class="meta">${p.level ? pill(String(p.level), "Level ") : ""}${pill(p.status)}</div>
+        ${p.description ? `<p class="desc">${hl(p.description)}</p>` : ""}
+        ${logList(p.log, 4)}
+      </article>`;
+    }).join("");
+    return toolbar(null, "Search the party…") + (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("party members — add them in data/campaign.json"));
+  };
+
+  function entityView(items, what, filters, filterFn) {
+    const list = items.filter(matches).filter(filterFn)
+      .sort((a, b) => (b.last_seen || 0) - (a.last_seen || 0) || a.name.localeCompare(b.name));
+    const cards = list.map(n => `<article class="card ent">
+        <h3>${hl(n.name)}</h3>
+        ${n.role ? `<div class="role">${hl(n.role)}${n.location ? ` · ${hl(n.location)}` : ""}</div>` : ""}
+        <div class="meta">${pill(n.disposition)}${n.status && n.status !== "alive" ? pill(n.status) : ""}
+          ${n.first_seen ? `<span class="pill">First seen S${n.first_seen}</span>` : ""}</div>
+        ${n.description ? `<p class="desc">${hl(n.description)}</p>` : ""}
+        ${logList(n.log)}
+      </article>`).join("");
+    return toolbar(filters, `Search ${what}…`) + (list.length ? `<div class="grid">${cards}</div>` : emptyMsg(what));
+  }
+
+  R.npcs = () => entityView(data.npcs, "NPCs",
+    [["all", "All"], ["ally", "Allies"], ["hostile", "Hostile"], ["dead", "Dead"]],
+    n => state.filter === "all" ? true
+      : state.filter === "ally" ? ["ally", "friendly"].includes(n.disposition)
+      : state.filter === "dead" ? (n.status || "").toLowerCase() === "dead"
+      : ["hostile", "suspicious"].includes(n.disposition));
+
+  R.places = () => entityView(data.locations, "places", null, () => true);
+
+  R.quests = () => {
+    const order = { active: 0, complete: 1, failed: 2 };
+    const list = data.quests.filter(matches)
+      .filter(q => state.filter === "all" || q.status === state.filter)
+      .sort((a, b) => (order[a.status] ?? 3) - (order[b.status] ?? 3) || (b.last_seen || 0) - (a.last_seen || 0));
+    const cards = list.map(q => `<article class="card ent">
+        <h3>${hl(q.name)}</h3>
+        ${q.giver ? `<div class="role">Given by ${hl(q.giver)}</div>` : ""}
+        <div class="meta">${pill(q.status)}${q.first_seen ? `<span class="pill">Since S${q.first_seen}</span>` : ""}</div>
+        ${q.description ? `<p class="desc">${hl(q.description)}</p>` : ""}
+        ${logList(q.log)}
+      </article>`).join("");
+    return toolbar([["all", "All"], ["active", "Active"], ["complete", "Done"], ["failed", "Failed"]], "Search quests…") +
+      (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("quests"));
+  };
+
+  R.mysteries = () => {
+    const list = data.mysteries.filter(matches)
+      .filter(m => state.filter === "all" || (m.status || "open") === state.filter)
+      .sort((a, b) => (a.status === "resolved") - (b.status === "resolved") || (b.opened || 0) - (a.opened || 0));
+    const cards = list.map(m => `<article class="card ent">
+        <h3>${hl(m.title)}</h3>
+        <div class="meta">${pill(m.status || "open")}<span class="pill">Raised S${m.opened}</span>${m.resolved ? `<span class="pill">Solved S${m.resolved}</span>` : ""}</div>
+        ${m.description ? `<p class="desc">${hl(m.description)}</p>` : ""}
+        ${m.resolution ? `<div class="cliff" style="font-style:normal;margin-bottom:10px"><b>Answer:</b> ${hl(m.resolution)}</div>` : ""}
+        ${m.clues && m.clues.length ? logList(m.clues, 5) : `<p class="muted" style="margin:0">No clues yet.</p>`}
+      </article>`).join("");
+    return toolbar([["all", "All"], ["open", "Unsolved"], ["resolved", "Solved"]], "Search mysteries…") +
+      (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("mysteries"));
+  };
+
+  R.loot = () => {
+    const list = data.loot.filter(matches).sort((a, b) => b.session - a.session);
+    const rows = list.map(l => `<tr><td>${slink(l.session)}</td><td><b>${hl(l.item)}</b></td><td>${hl(l.holder)}</td><td>${hl(l.description)}</td></tr>`).join("");
+    return toolbar(null, "Search loot…") + (list.length
+      ? `<div class="card table-wrap" style="padding:6px 8px"><table><thead><tr><th>Sess.</th><th>Item</th><th>Who has it</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></div>`
+      : emptyMsg("loot"));
+  };
+
+  R.tally = () => {
+    const kills = data.kills.filter(matches);
+    const by = {};
+    kills.forEach(k => { by[k.character] = (by[k.character] || 0) + (k.count || 1); });
+    const ranked = Object.entries(by).sort((a, b) => b[1] - a[1]);
+    const max = ranked.length ? ranked[0][1] : 1;
+    const bars = ranked.map(([who, n]) => `<div class="bar"><div><b>${hl(who)}</b></div>
+      <div class="track"><div class="fill" style="width:${(n / max * 100).toFixed(1)}%"></div></div><div class="v">${n}</div></div>`).join("");
+    const rows = [...kills].sort((a, b) => b.session - a.session)
+      .map(k => `<tr><td>${slink(k.session)}</td><td>${hl(k.character)}</td><td>${hl(k.creature)}</td><td>${k.count}</td></tr>`).join("");
+    return toolbar(null, "Search by character or creature…") + (ranked.length
+      ? `<div class="card"><div class="bars">${bars}</div></div>
+         <h2 class="view-title" style="font-size:24px;margin:28px 0 12px">Every kill</h2>
+         <div class="card table-wrap" style="padding:6px 8px"><table><thead><tr><th>Sess.</th><th>Who</th><th>What</th><th>#</th></tr></thead><tbody>${rows}</tbody></table></div>`
+      : emptyMsg("kills"));
+  };
+
+  R.quotes = () => {
+    const list = data.quotes.filter(matches).sort((a, b) => b.session - a.session);
+    const cards = list.map(q => `<figure class="card" style="margin:0"><blockquote>${hl(q.text)}</blockquote>
+      <figcaption class="qby">— ${hl(q.speaker)}, ${slink(q.session)}</figcaption></figure>`).join("");
+    return toolbar(null, "Search quotes…") + (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("quotes"));
+  };
+
+  // ---------- shell ----------
+  function renderTabs() {
+    document.getElementById("tabbar").innerHTML = VIEWS.map(v =>
+      `<button class="tab" role="tab" data-view="${v.id}" aria-selected="${state.view === v.id}">${v.label}<span class="n">${v.count(data)}</span></button>`
+    ).join("") + `<span class="spacer"></span><button class="theme-btn" id="theme" title="Toggle light/dark" aria-label="Toggle light or dark theme">◐</button>`;
+  }
+
+  function render(keepFocus) {
+    renderTabs();
+    const main = document.getElementById("main");
+    const pos = keepFocus ? document.getElementById("q")?.selectionStart : null;
+    main.innerHTML = R[state.view]();
+    if (keepFocus) {
+      const q = document.getElementById("q");
+      q.focus();
+      if (pos != null) q.setSelectionRange(pos, pos);
+    }
+  }
+
+  function go(view, session) {
+    if (view !== state.view) { state.filter = "all"; }
+    state.view = view;
+    state.openSession = session ?? null;
+    const hash = "#" + view + (session != null ? "/" + session : "");
+    if (location.hash !== hash) history.replaceState(null, "", hash);
+    render();
+    if (session != null) {
+      const el = document.getElementById("session-" + session);
+      if (el) el.scrollIntoView({ block: "start", behavior: "smooth" });
+    } else if (window.scrollY > document.querySelector("nav.tabs").offsetTop) {
+      window.scrollTo({ top: document.querySelector("nav.tabs").offsetTop });
+    }
+  }
+
+  function fromHash() {
+    const [view, n] = location.hash.replace(/^#/, "").split("/");
+    const valid = VIEWS.some(v => v.id === view);
+    go(valid ? view : "chronicle", n ? Number(n) : null);
+  }
+
+  document.addEventListener("click", e => {
+    const t = e.target.closest("[data-view],[data-session],[data-filter],[data-search],#theme");
+    if (!t) return;
+    if (t.id === "theme") {
+      const cur = document.documentElement.dataset.theme ||
+        (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      const next = cur === "dark" ? "light" : "dark";
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem("chronicle-theme", next); } catch (_) {}
+      return;
+    }
+    if (t.dataset.view) { state.q = ""; go(t.dataset.view); }
+    else if (t.dataset.session) { e.preventDefault(); state.q = ""; go("chronicle", Number(t.dataset.session)); }
+    else if (t.dataset.filter) { state.filter = t.dataset.filter; render(); }
+    else if (t.dataset.search) { state.q = t.dataset.search; go("chronicle"); }
+  });
+  document.addEventListener("input", e => {
+    if (e.target.id === "q") { state.q = e.target.value.trim(); render(true); }
+  });
+  window.addEventListener("hashchange", fromHash);
+
+  try {
+    const saved = localStorage.getItem("chronicle-theme");
+    if (saved) document.documentElement.dataset.theme = saved;
+  } catch (_) {}
+
+  function normalize(d) {
+    for (const k of ["party", "npcs", "locations", "quests", "mysteries", "loot", "kills", "quotes", "sessions"]) d[k] = d[k] || [];
+    d.campaign = d.campaign || {};
+    return d;
+  }
+
+  function renderHeader() {
+    const c = data.campaign;
+    document.title = c.title || "Campaign Chronicle";
+    document.getElementById("title").textContent = c.title || "Our Campaign";
+    document.getElementById("subtitle").textContent = c.subtitle || "";
+    document.getElementById("eyebrow").textContent = [c.setting, c.dm && "DM: " + c.dm].filter(Boolean).join(" · ") || "Campaign Chronicle";
+    const openM = data.mysteries.filter(m => m.status !== "resolved").length;
+    const activeQ = data.quests.filter(q => q.status === "active").length;
+    document.getElementById("stats").innerHTML =
+      `<span><b>${data.sessions.length}</b>sessions</span><span><b>${data.npcs.length}</b>NPCs met</span>` +
+      `<span><b>${activeQ}</b>active quests</span><span><b>${openM}</b>unsolved mysteries</span>`;
+    const upd = data.updated ? new Date(data.updated) : null;
+    document.getElementById("footer").textContent = upd && !isNaN(upd)
+      ? `Last updated ${upd.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })} by the Scribe.`
+      : "Kept by the Scribe.";
+  }
+
+  fetch(DATA_URL, { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(d => { data = normalize(d); renderHeader(); fromHash(); })
+    .catch(err => {
+      document.getElementById("title").textContent = "Couldn't load the chronicle";
+      document.getElementById("main").innerHTML = `<div class="empty" style="margin-top:24px">Couldn't read <code>${esc(DATA_URL)}</code> (${esc(err.message)}).<br>
+        If you opened this file directly, run <code>python scribe.py serve</code> instead.</div>`;
+    });
+})();
+</script>
+</body>
+</html>

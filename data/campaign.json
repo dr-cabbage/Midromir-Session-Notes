@@ -1,0 +1,30 @@
+{
+  "campaign": {
+    "title": "Our Campaign",
+    "subtitle": "The adventures of a party that should probably not be trusted with anything.",
+    "setting": "Homebrew world",
+    "dm": "Your DM's name"
+  },
+  "party": [
+    {
+      "id": "character-one",
+      "name": "Character One",
+      "player": "Kale",
+      "race": "Elf",
+      "class": "Ranger",
+      "level": 1,
+      "status": "active",
+      "description": "Replace this with your character. Add one entry per party member so the Scribe can match players to characters.",
+      "manual": true,
+      "log": []
+    }
+  ],
+  "npcs": [],
+  "locations": [],
+  "quests": [],
+  "mysteries": [],
+  "loot": [],
+  "kills": [],
+  "quotes": [],
+  "sessions": []
+}

@@ -1,0 +1,257 @@
+{
+  "campaign": {
+    "title": "The Raven Coin",
+    "subtitle": "A sample campaign.",
+    "setting": "The Mirewood",
+    "dm": "Sam"
+  },
+  "party": [
+    {
+      "id": "thorn",
+      "name": "Thorn",
+      "player": "Kale",
+      "race": "Half-elf",
+      "class": "Ranger",
+      "level": 2,
+      "status": "active",
+      "manual": true,
+      "log": [
+        {
+          "session": 1,
+          "text": "Lost his bow to the goblins."
+        },
+        {
+          "session": 2,
+          "text": "Reached level 2 and got his bow back."
+        }
+      ]
+    },
+    {
+      "id": "grimbold",
+      "name": "Grimbold",
+      "player": "Dave",
+      "race": "Dwarf",
+      "class": "Barbarian",
+      "level": 1,
+      "status": "active",
+      "manual": true,
+      "log": [
+        {
+          "session": 2,
+          "text": "Drank the witch's tea. Now glows faintly."
+        }
+      ]
+    }
+  ],
+  "npcs": [
+    {
+      "id": "snik",
+      "name": "Snik",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Traded directions for his life."
+        },
+        {
+          "session": 2,
+          "text": "Guided the party to Gruk's camp."
+        }
+      ],
+      "role": "goblin scout",
+      "disposition": "friendly",
+      "status": "alive",
+      "description": "A nervous goblin who knows the swamp.",
+      "last_seen": 2
+    },
+    {
+      "id": "boss-gruk",
+      "name": "Boss Gruk",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Ordered the kidnapping."
+        },
+        {
+          "session": 2,
+          "text": "Killed by Thorn."
+        }
+      ],
+      "role": "goblin chief",
+      "disposition": "hostile",
+      "last_seen": 2,
+      "status": "dead"
+    },
+    {
+      "id": "agatha",
+      "name": "Agatha",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Knows about the raven coins."
+        }
+      ],
+      "role": "swamp witch",
+      "disposition": "neutral",
+      "last_seen": 2
+    }
+  ],
+  "locations": [
+    {
+      "id": "the-mirewood",
+      "name": "The Mirewood",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Where the party escaped to."
+        },
+        {
+          "session": 2,
+          "text": "Gruk's camp is in the middle."
+        }
+      ],
+      "description": "A foggy swamp.",
+      "last_seen": 2
+    }
+  ],
+  "quests": [
+    {
+      "id": "get-thorn-s-bow-back",
+      "name": "Get Thorn's bow back",
+      "status": "complete",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Gruk has it."
+        },
+        {
+          "session": 2,
+          "text": "Recovered from the camp."
+        }
+      ],
+      "giver": "Thorn",
+      "last_seen": 2,
+      "closed": 2
+    }
+  ],
+  "mysteries": [
+    {
+      "id": "who-paid-the-goblins",
+      "title": "Who paid the goblins?",
+      "status": "open",
+      "opened": 1,
+      "clues": [
+        {
+          "session": 1,
+          "text": "The coins were stamped with a raven."
+        },
+        {
+          "session": 2,
+          "text": "The coins come from the capital."
+        }
+      ],
+      "resolution": "",
+      "resolved": null,
+      "description": "Gruk mentioned a client."
+    },
+    {
+      "id": "why-does-grimbold-glow",
+      "title": "Why does Grimbold glow?",
+      "status": "open",
+      "opened": 2,
+      "clues": [],
+      "resolution": "",
+      "resolved": null,
+      "description": "Tea side effect?"
+    }
+  ],
+  "loot": [
+    {
+      "session": 1,
+      "item": "Raven-stamped coins",
+      "holder": "Grimbold",
+      "description": "12 gold"
+    },
+    {
+      "session": 2,
+      "item": "Thorn's bow",
+      "holder": "Thorn",
+      "description": ""
+    }
+  ],
+  "kills": [
+    {
+      "session": 1,
+      "character": "Grimbold",
+      "creature": "goblin",
+      "count": 2
+    },
+    {
+      "session": 1,
+      "character": "Thorn",
+      "creature": "goblin",
+      "count": 1
+    },
+    {
+      "session": 2,
+      "character": "Thorn",
+      "creature": "goblin chief",
+      "count": 1
+    }
+  ],
+  "quotes": [
+    {
+      "session": 1,
+      "speaker": "Grimbold",
+      "text": "I solve problems with my head. Literally."
+    },
+    {
+      "session": 2,
+      "speaker": "Agatha",
+      "text": "The tea is fine. Mostly."
+    }
+  ],
+  "sessions": [
+    {
+      "number": 1,
+      "date": "2026-09-01",
+      "title": "Kidnapped by Goblins",
+      "summary": "The party wakes up in a goblin cart and immediately makes it worse.",
+      "recap": [
+        "Thorn woke up tied to Grimbold.",
+        "They escaped into the Mirewood."
+      ],
+      "highlights": [
+        "Grimbold rolled a nat 20 to headbutt the cart open."
+      ],
+      "decisions": [
+        "Spared the goblin Snik in exchange for directions."
+      ],
+      "cliffhanger": "A lantern is moving through the swamp toward them.",
+      "in_game_days": "",
+      "source": "craig-session1.zip"
+    },
+    {
+      "number": 2,
+      "date": "2026-09-08",
+      "title": "The Lantern Witch",
+      "summary": "The lantern belongs to a witch with opinions.",
+      "recap": [
+        "Agatha the swamp witch offered tea.",
+        "Thorn got his bow back from Gruk's camp."
+      ],
+      "highlights": [
+        "Thorn tried to seduce a frog."
+      ],
+      "decisions": [],
+      "cliffhanger": "Agatha says the raven coins come from the capital.",
+      "in_game_days": "",
+      "source": "craig-session2.zip"
+    }
+  ],
+  "updated": "2026-09-16T19:35:12"
+}
