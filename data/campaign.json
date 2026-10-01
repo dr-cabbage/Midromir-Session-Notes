@@ -14,12 +14,16 @@
       "class": "Paladin",
       "level": 4,
       "status": "active",
-      "description": "Alexander Warden is a protector of truth and the weak.",
+      "description": "Alexander Warden is a protector of truth and the weak. Part Harpy Eagle",
       "manual": true,
       "log": [
         {
           "session": 1,
           "text": "Took point on negotiations with the tavern owner and the ship's quartermaster, securing free (unpaid) passage for the whole crew. Overperformed at cargo-hauling thanks to his 20 strength, yanking other sailors off their feet, and found a bloodstained cloth hidden in a cargo crate."
+        },
+        {
+          "session": 2,
+          "text": "Loaded cargo, rigged sails, found the bloodstained cloth in a crate, cooked an excellent lunch (nat 20), and accidentally shot the quartermaster Quart dead through a door while trying to knock. Took accountability for the chaos (lying about it, ironically) and ended up holding one of the stolen heart fruits."
         }
       ]
     },
@@ -31,12 +35,16 @@
       "class": "Ranger",
       "level": 4,
       "status": "active",
-      "description": "Ghalen is our fearless captain that wears a wolf pelt.",
+      "description": "Ghalen is our fearless captain that wears a wolf pelt. Part Painted Dog",
       "manual": true,
       "log": [
         {
           "session": 1,
           "text": "Cast Good Berries and distributed them to the party, held onto Milo's share. Showed off his hand-drawn map, which got a waterway/boat route added by Calazar. Worked deck-scrubbing and kitchen duty aboard the ship."
+        },
+        {
+          "session": 2,
+          "text": "Helped cook, handed out rotten-food 'justice' to Skidmark and Butt Stuff for their harassment and threats, and ultimately gave the order to shoot Skidmark. Later extracted Fishfucker's heart for the fruit swap and packed up the stolen heart fruits in wrapping."
         }
       ]
     },
@@ -48,12 +56,16 @@
       "class": "Cleric",
       "level": 4,
       "status": "active",
-      "description": "Phineas is our resident cleric who was raised in a cave cult.",
+      "description": "Phineas is our resident cleric who was raised in a cave cult. Part Caracal Cat",
       "manual": true,
       "log": [
         {
           "session": 1,
           "text": "Revealed as the richest party member with 44 gold. Repeatedly angled toward robbing the bank, got caught staking it out and was dragged off by the ear. Later hid in cargo crates instead of helping load the ship."
+        },
+        {
+          "session": 2,
+          "text": "Hid in cargo to dodge work, got weak-kneed over Alexander's cooking, accidentally tried sneaking snacks before lunch, then Eldritch Blasted Forehead execution-style and used Control Flames to stop Skidmark's dynamite suicide run before knocking him out."
         }
       ]
     },
@@ -65,12 +77,16 @@
       "class": "Fighter",
       "level": 4,
       "status": "active",
-      "description": "Milo is our sleepyhead who hates his sister.",
+      "description": "Milo is our sleepyhead who hates his sister. Part Firefly",
       "manual": true,
       "log": [
         {
           "session": 1,
           "text": "Absent the entire session (presumed overslept). Strongly implied, via bootprint evidence, to be the one who trashed the Tomoro tavern last time the party was there, though no one connected the dots on screen."
+        },
+        {
+          "session": 2,
+          "text": "Slept through boarding and used a Firefly transformation charge to sneak aboard, got discovered hiding in a hammock, and later ripped the still-beating heart out of Forehead with his bare hands."
         }
       ]
     },
@@ -82,12 +98,16 @@
       "class": "Rogue",
       "level": 4,
       "status": "active",
-      "description": "Calazar is our mute rogue with silent shotguns.",
+      "description": "Calazar is our mute rogue with silent shotguns. Part Cuttlefish",
       "manual": true,
       "log": [
         {
           "session": 1,
           "text": "Showed off his detailed hand-drawn map, which everyone else was politely obsessed with over Ghalen's. Handled ship rigging duties post-boarding, and smudged a contract detail with dockside water while making a dramatic entrance."
+        },
+        {
+          "session": 2,
+          "text": "Investigated the marked cargo crate and found four stolen heart fruits, later Wild Shaped into a cuttlefish to sneak into the locked captain's quarters and found documents proving the ship is deliberately sailing to the Rat Folk Kingdom instead of the party's destination."
         }
       ]
     }
@@ -140,6 +160,142 @@
       "status": "unknown",
       "location": "Aboard the merchant ship",
       "last_seen": 1
+    },
+    {
+      "id": "captain-fishbone",
+      "name": "Captain Fishbone",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Finally introduced himself after enjoying Alexander's cooking (19/20). Remained suspicious of the string of crew deaths but mostly shrugged them off as long as the cargo still gets delivered. His quarters were secretly searched by Calazar."
+        }
+      ],
+      "role": "Ship's captain",
+      "disposition": "suspicious",
+      "status": "alive",
+      "description": "The ship's secretive captain, always concealed by a coat and cavalier hat. Oddly particular about the fish he eats and entirely unbothered by his crew dying around him.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "quart",
+      "name": "Quart",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Accidentally shot through the captain's quarters door by Alexander while trying to get the captain's attention. Thrown overboard by Phineas and Gravestone."
+        }
+      ],
+      "role": "Quartermaster",
+      "disposition": "neutral",
+      "status": "dead",
+      "description": "The ship's quartermaster, in charge of the labor contract, crew discipline, and cargo oversight.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "forehead",
+      "name": "Forehead",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Had his heart ripped out by Milo and was then finished off by Phineas with an Eldritch Blast, to harvest one of the four replacement hearts."
+        }
+      ],
+      "role": "Helmsman / new quartermaster",
+      "disposition": "neutral",
+      "status": "dead",
+      "description": "The ship's helmsman, and Quart's younger brother who briefly inherited the quartermaster role.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "gravestone",
+      "name": "Gravestone",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Mostly blind, failed to notice most of the carnage happening around him and helped throw Quart's body overboard."
+        }
+      ],
+      "role": "Gunner",
+      "disposition": "neutral",
+      "status": "alive",
+      "description": "Elderly halfling gunner in charge of the ship's cannons.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "hairbrush",
+      "name": "Hairbrush",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Too scared and distracted to notice the murders happening around him; got forced to take the ship's wheel by the captain mid-crisis."
+        }
+      ],
+      "role": "Deckhand / rookie sailor",
+      "disposition": "neutral",
+      "status": "alive",
+      "description": "The newest crew recruit, only a week into sailing, searching for his long-lost fiancee who was lost at sea.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "skidmark",
+      "name": "Skidmark",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Fed rotten food in retaliation for threatening Phineas, panicked after the murders started, tried to flee with lit dynamite, got blown into hammocks by Phineas's Control Flames, and was ultimately killed on Ghalen's order."
+        }
+      ],
+      "role": "Deckhand",
+      "disposition": "hostile",
+      "status": "dead",
+      "description": "A drunk, foul-smelling crewmate who pulled a gun on Phineas as a 'prank' and was generally unpleasant.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "butt-stuff",
+      "name": "Butt Stuff",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Found decapitated before the party could do anything to him; his heart was later harvested to replace one of the stolen fruit."
+        }
+      ],
+      "role": "Deckhand",
+      "disposition": "hostile",
+      "status": "dead",
+      "description": "A crewmate below decks who made unwanted advances on Alexander.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
+    },
+    {
+      "id": "fishfucker",
+      "name": "Fishfucker",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "Fed rotten food but suffered no ill effects. Later slipped in blood/excrement during the chaos below deck and was killed so his heart could be harvested."
+        }
+      ],
+      "role": "Deckhand",
+      "disposition": "neutral",
+      "status": "dead",
+      "description": "A nervous, mute deckhand with an unsettling habit involving fish in his pants.",
+      "location": "The merchant ship (Copper Tide)",
+      "last_seen": 2
     }
   ],
   "locations": [],
@@ -153,11 +309,15 @@
         {
           "session": 1,
           "text": "The party abandoned overland travel and bank/boat theft plans, ultimately signing on as unpaid ship labor to find passage there, though the ship's actual destination is unconfirmed."
+        },
+        {
+          "session": 2,
+          "text": "The party boarded the merchant ship Copper Tide to reach their destination, but Calazar discovered documents proving the ship is actually sailing toward the Rat Folk Kingdom - not where the party intended to go. They have about two hours before passing the point of no return to redirect the ship."
         }
       ],
       "description": "A new unnamed area appeared on the map overnight; the party is trying to reach it.",
       "giver": "N/A",
-      "last_seen": 1
+      "last_seen": 2
     },
     {
       "id": "clear-the-party-s-name-in-tomoro",
@@ -173,6 +333,19 @@
       "description": "Find the real culprit behind the destroyed tavern in Tomoro to be allowed back into the village.",
       "giver": "Tavern Owner (Tomoro)",
       "last_seen": 1
+    },
+    {
+      "id": "dispose-of-the-stolen-heart-fruits-discreetly",
+      "name": "Dispose of the Stolen Heart Fruits Discreetly",
+      "status": "active",
+      "first_seen": 2,
+      "log": [
+        {
+          "session": 2,
+          "text": "After finding four stolen 'heart fruit' in a marked cargo crate, the party took them and tried to cover their tracks by murdering four crewmates to harvest replacement hearts of matching weight, hiding the bodies in hammocks to dump overboard once the ship docks."
+        }
+      ],
+      "last_seen": 2
     }
   ],
   "mysteries": [
@@ -194,7 +367,7 @@
     {
       "id": "what-s-inside-the-bloodstained-cargo-crate",
       "title": "What's inside the bloodstained cargo crate?",
-      "status": "open",
+      "status": "resolved",
       "opened": 1,
       "clues": [
         {
@@ -202,8 +375,8 @@
           "text": "The cloth resembled a protective wrap used to keep something safe during transport; Alexander marked the crate to investigate further at night."
         }
       ],
-      "resolution": "",
-      "resolved": null,
+      "resolution": "The crate contained four carefully wrapped, still-beating 'heart fruits' - rare and dangerous enough to start wars, tied to the Anomaly Island ritual that gave the party their animal-based powers.",
+      "resolved": 2,
       "description": "Alexander found a bloodstained cloth wrap hidden inside a sealed, leather-strapped cargo crate while loading the ship."
     },
     {
@@ -211,10 +384,25 @@
       "title": "Who is the ship's captain?",
       "status": "open",
       "opened": 1,
-      "clues": [],
+      "clues": [
+        {
+          "session": 2,
+          "text": "The captain goes by Captain Fishbone, always wears a face-concealing coat and hat, seems unfazed by multiple crew deaths, and is secretly steering the ship toward the Rat Folk Kingdom according to documents found in his quarters."
+        }
+      ],
       "resolution": "",
       "resolved": null,
       "description": "A large, intimidating captain was seen briefly near the helmsman, face obscured by a wide-brimmed hat."
+    },
+    {
+      "id": "why-is-the-ship-really-sailing-to-the-rat-folk-kingdom",
+      "title": "Why is the ship really sailing to the Rat Folk Kingdom?",
+      "status": "open",
+      "opened": 2,
+      "clues": [],
+      "resolution": "",
+      "resolved": null,
+      "description": "Calazar found documents suggesting this specific ship and its cargo run (the heart fruits) were deliberately sought out, with the true destination being the Rat Folk Kingdom rather than where the party wanted to go."
     }
   ],
   "loot": [
@@ -229,9 +417,46 @@
       "item": "Unpaid ship labor contract",
       "holder": "Quartermaster",
       "description": "Signed agreement granting the party free passage on the merchant ship in exchange for labor; a stray water drop smudged a key detail (compensation or employment length)."
+    },
+    {
+      "session": 2,
+      "item": "Heart Fruits (x4, stolen)",
+      "holder": "party",
+      "description": "Freshly cut, still-beating fruits tied to the Anomaly Island ritual. Deadly to anyone who isn't an Anomaly survivor or doesn't match the fruit's 'animal type.' Hidden among the party after replacing them with harvested crew hearts."
+    },
+    {
+      "session": 2,
+      "item": "Documents on the ship's true destination",
+      "holder": "Calazar Dorento",
+      "description": "Papers found in the captain's quarters proving the ship was specifically sought out for its cargo run and is secretly headed to the Rat Folk Kingdom."
     }
   ],
-  "kills": [],
+  "kills": [
+    {
+      "session": 2,
+      "character": "Milo Dozewell",
+      "creature": "Forehead (helmsman)",
+      "count": 1
+    },
+    {
+      "session": 2,
+      "character": "Phineas Fernspark",
+      "creature": "Forehead, Skidmark (helmsman, finishing blow)",
+      "count": 2
+    },
+    {
+      "session": 2,
+      "character": "Ghalen Mordecai",
+      "creature": "Fishfucker (crewmate)",
+      "count": 1
+    },
+    {
+      "session": 2,
+      "character": "Calazar Dorento",
+      "creature": "Butt Stuff (crewmate, headless)",
+      "count": 1
+    }
+  ],
   "quotes": [
     {
       "session": 1,
@@ -257,6 +482,31 @@
       "session": 1,
       "speaker": "DM",
       "text": "Be careful hiding under large cargo - cargo can shift while the boat is on the water."
+    },
+    {
+      "session": 2,
+      "speaker": "Alexander",
+      "text": "Everything you see here is on me."
+    },
+    {
+      "session": 2,
+      "speaker": "Captain Fishbone",
+      "text": "I don't know this crew, but most of you seem quite incompetent. At least we have a good cook."
+    },
+    {
+      "session": 2,
+      "speaker": "Alexander",
+      "text": "Shoot him!"
+    },
+    {
+      "session": 2,
+      "speaker": "DM",
+      "text": "A loud gunshot goes off through the door. Luckily he didn't know how tall you were. You shot right over your head and killed the quartermaster. One down."
+    },
+    {
+      "session": 2,
+      "speaker": "Milo",
+      "text": "What am I gonna do with the heart?"
     }
   ],
   "sessions": [
@@ -305,7 +555,38 @@
         "Joke about the fired sailors being 'about to level up' and get a mutiny pension before getting canned."
       ],
       "source": ""
+    },
+    {
+      "number": 2,
+      "date": "2026-09-30",
+      "title": "Hearts, Shotguns, and Skidmark's Diaper",
+      "summary": "The party boarded their new merchant ship, met the worst crew in the world, and by lunchtime had accidentally (and then not-so-accidentally) murdered most of it while stealing four mysterious beating hearts from the cargo hold.",
+      "recap": [
+        "The session opened with everyone settling into their forced labor contract aboard the merchant ship: Phineas hid in the cargo to avoid work, Ghalen scrubbed decks and helped in the kitchen, Alexander loaded cargo and rigged sails, and Calazar worked the rigging near the crow's nest. Milo, true to form, had overslept and used a charge of his Firefly transformation just to sneak aboard before departure, waking up in a crew hammock below deck like nothing happened.",
+        "While loading cargo, Alexander found a blood-stained cloth hidden in one of the crates and marked it for later investigation. The quartermaster, a burly red-haired man named Quart, sent away four paid crewmates to make room for the party's free labor, and Alexander tried and failed to memorize their faces (rolled too low, remembered just one). The ship's actual captain stayed hidden in his quarters the entire time, wearing a coat and hat that concealed his face - nobody got so much as a clear look at him before he vanished below deck.",
+        "The crew turned out to be, charitably, a lot: a nervous mute deckhand the party nicknamed Fishfucker (for reasons nobody wanted explained), a drunk old-timer named Skidmark who pulled a gun on Phineas as a 'mercenary prank,' a helmsman called Forehead, an elderly halfling gunner named Gravestone, a rookie named Hairbrush searching for his long-lost fiancee, and a crewmate downstairs who tried to kiss Alexander and got nicknamed Butt Stuff. Calazar, in a fit of professional courtesy, advised Alexander to 'use protection' by nodding at his shotgun.",
+        "Alexander cooked lunch (rolled a 20) and the crew loved it, though the captain - who introduced himself as Captain Fishbone - was oddly cagey about the fish in the meal. Meanwhile Ghalen decided the crew's various offenses (Skidmark's gun stunt, Butt Stuff's unwanted advances) warranted consequences, and spiked Skidmark's and Butt Stuff's plates with rotten food instead of poison. Skidmark passed out drunk; Butt Stuff ate his tainted meal with no ill effects whatsoever.",
+        "Calazar, sent by Alexander to investigate the marked crate, pried it open to reveal four freshly cut, still-beating 'heart fruits' - virgin, unbitten, and apparently valuable enough to start wars. The party determined these related to the Anomaly Island ritual that gave them their animal-based powers, and that eating one not matching your type would kill a normal person outright. They agreed the fruits were too dangerous to leave on the ship, but needed to replace the stolen hearts' weight and hide the theft from the captain.",
+        "Things escalated fast. The quartermaster, Quart, was accidentally shot through the door by Alexander when he knocked too aggressively trying to find the captain - the shot went clean through Quart's skull. Blaming it on 'Fishfucker' via deception didn't stick with the suspicious captain, who instead had the party haul him down to find the real culprit - only to discover Butt Stuff already decapitated (not by them). The captain, increasingly done with his own crew, started treating the mounting body count as just Tuesday.",
+        "With hearts needed to replace the stolen fruit, the party turned predatory: Milo ripped the still-beating heart out of Forehead (who turned out to be Quart's younger brother, conveniently inheriting the dead quartermaster's position moments before dying), and Phineas finished him with an Eldritch Blast to the back of the head, splattering blood everywhere. The explosion woke Skidmark, who panicked, tried to flee with lit dynamite, got blasted with Phineas's control flames spell into the hammocks, and was knocked unconscious before he could blow up the ship. Fishfucker, already blind and hyperventilating from the chaos, slipped in blood and excrement, got pushed near the dynamite fuse, and was finished off - the fourth and final heart extracted by Ghalen, in what the party agreed he was uncomfortably skilled at.",
+        "The party scrambled to hide the evidence: bodies stuffed into hammocks disguised as sleeping crew, blood and mess hastily mopped, and the plan settled on dumping the corpses overboard once the ship docked rather than risk it now. Meanwhile Calazar, having slipped into the locked captain's quarters in cuttlefish form via Wild Shape, searched Fishbone's cabin and found documents proving this ship and its cargo run were specifically sought out - and that its current course leads straight to the Rat Folk Kingdom, not the party's intended destination.",
+        "With the ship nearing the point of no return (about two hours out from a course correction being possible), the party was left scrambling for a plan: convince Hairbrush to alter course, force the issue by disabling the ship, or some combination of mutiny and improvisation. No firm plan was settled before the session ended, leaving the party with four stolen heart fruits, three crew corpses hidden in hammocks, an unmet and increasingly suspicious captain, and a ship sailing toward entirely the wrong kingdom."
+      ],
+      "highlights": [
+        "Alexander rolled a natural 20 cooking lunch and genuinely impressed the murderous ship's captain with his cuisine.",
+        "Phineas face-planted down the stairs from an 18 Charisma save after smelling the food too hard, then got scolded for trying to snack before lunch.",
+        "Alexander accidentally shot the quartermaster Quart clean through a door while 'knocking loudly and annoyingly,' instantly creating the session's first murder mystery.",
+        "The party extracted a heart from Forehead mid-grapple, then Phineas Eldritch Blasted him execution-style - only for the captain and most of the crew to fail their perception checks to notice an exploding man.",
+        "Skidmark tried to flee with lit dynamite mid-panic attack; Phineas used Control Flames to yeet him fifteen feet into a pile of hammocks, averting a ship-wide explosion by the skin of his teeth.",
+        "Fishfucker survived eating rotten poisoned fish completely unscathed, to everyone's bafflement.",
+        "Calazar turned into a cuttlefish to scoot past Hairbrush and sneak into the locked captain's quarters, uncovering that the ship was deliberately steering toward the Rat Folk Kingdom."
+      ],
+      "decisions": [],
+      "cliffhanger": "With three crew corpses stuffed in hammocks, four stolen heart fruits in their bags, and proof the ship is secretly bound for the Rat Folk Kingdom instead of their destination, the party has about two hours before the ship passes the point of no return - and still no plan beyond vague talk of mutiny, sabotage, or just asking Hairbrush nicely.",
+      "in_game_days": "",
+      "table_talk": [],
+      "source": ""
     }
   ],
-  "updated": "2026-09-30T19:29:28"
+  "updated": "2026-09-30T23:07:50"
 }
