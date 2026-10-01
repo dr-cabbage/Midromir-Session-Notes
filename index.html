@@ -132,6 +132,10 @@ h2.view-title { font: 600 32px/1.1 var(--serif); margin: 28px 0 0; }
 .session-body ul { margin: 0; padding-left: 20px; }
 .session-body li { margin: 4px 0; }
 .cliff { border-left: 3px solid var(--ember); padding: 8px 14px; background: var(--panel-2); border-radius: 0 10px 10px 0; font-style: italic; }
+.card-links { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; margin-top: 6px; }
+.card-links .slink, .linkbtn { font-size: 12.5px; }
+.linkbtn { border: 0; background: none; padding: 0; cursor: pointer; color: var(--accent); font-weight: 600; }
+.linkbtn:hover { text-decoration: underline; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { font-size: 13px; padding: 2px 10px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); border: 1px solid var(--line); cursor: pointer; }
 .tag:hover { border-color: var(--accent); }
@@ -227,7 +231,8 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
   ];
 
   let data = null;
-  const state = { view: "chronicle", q: "", filter: "all", openSession: null };
+  const state = { view: "chronicle", q: "", filter: "all", openSession: null, page: 1 };
+  const PAGE = { chronicle: 8 };
 
   // ---------- helpers ----------
   const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
@@ -249,14 +254,24 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
   const initials = name => String(name || "?").split(/\s+/).map(w => w[0]).slice(0, 2).join("").toUpperCase();
   const logList = (log, limit = 3) => {
     if (!log || !log.length) return "";
-    const items = [...log].sort((a, b) => b.session - a.session)
-      .map(e => `<li>${slink(e.session)}<span>${hl(e.text)}</span></li>`);
+    const sorted = [...log].sort((a, b) => b.session - a.session);
+    const items = sorted.map(e => `<li>${slink(e.session)}<span>${hl(e.text)}</span></li>`);
     const first = items.slice(0, limit).join("");
     const rest = items.slice(limit).join("");
+    const oldest = sorted[sorted.length - 1].session, newest = sorted[limit - 1]?.session;
     return `<ul class="log">${first}</ul>` +
-      (rest ? `<details class="more"><summary>${items.length - limit} earlier</summary><ul class="log">${rest}</ul></details>` : "");
+      (rest ? `<details class="more"><summary>Show ${items.length - limit} earlier${newest ? ` (S${oldest}–S${newest - 1})` : ""}</summary><ul class="log">${rest}</ul></details>` : "");
   };
   const emptyMsg = what => `<div class="empty">No ${what} yet${state.q ? " matching “" + esc(state.q) + "”" : ""}.</div>`;
+
+  function page(list) {
+    const per = PAGE[state.view] || 24;
+    const shown = list.slice(0, per * state.page);
+    return { shown, hidden: list.length - shown.length };
+  }
+  const moreBtn = (hidden, what) => hidden > 0
+    ? `<div style="text-align:center;margin:20px 0"><button class="chip" data-more="1">Show ${Math.min(hidden, PAGE[state.view] || 24)} more ${what} (${hidden} left)</button></div>`
+    : "";
 
   function toolbar(filters, placeholder) {
     const chips = (filters || []).map(([val, label]) =>
@@ -271,7 +286,8 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
   const R = {};
 
   R.chronicle = () => {
-    const list = [...data.sessions].sort((a, b) => b.number - a.number).filter(matches);
+    const all = [...data.sessions].sort((a, b) => b.number - a.number).filter(matches);
+    const { shown: list, hidden } = page(all);
     const body = list.map(s => {
       const open = state.openSession === s.number || (state.q && list.length <= 3);
       const involved = [
@@ -285,7 +301,10 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
         <summary>
           <div class="snum"><div><small>SESSION</small>${s.number}</div></div>
           <div><h3>${hl(s.title)}</h3><p class="summary">${hl(s.summary)}</p></div>
-          <div class="date-col"><span class="date">${fmtDate(s.date)}</span><span class="chev" aria-hidden="true">›</span></div>
+          <div class="date-col"><span class="date">${fmtDate(s.date)}</span><span class="chev" aria-hidden="true">›</span>
+            <div class="card-links"><a class="slink" href="session.html?s=${s.number}">Open page ↗</a>
+              <button class="linkbtn" data-copy="${s.number}" title="Copy a link to this session's page">Copy link</button></div>
+          </div>
         </summary>
         <div class="session-body">
           ${(s.recap || []).map(p => `<p>${hl(p)}</p>`).join("")}
@@ -300,11 +319,11 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
       </details>`;
     }).join("");
     return toolbar(null, "Search every session… (a name, an item, “dragon”)") +
-      (list.length ? `<div class="stack">${body}</div>` : emptyMsg("sessions"));
+      (list.length ? `<div class="stack">${body}</div>${moreBtn(hidden, "sessions")}` : emptyMsg("sessions"));
   };
 
   R.party = () => {
-    const list = data.party.filter(matches);
+    const { shown: list, hidden } = page(data.party.filter(matches));
     const cards = list.map(p => {
       const line = [p.race, p.class && (p.subclass ? `${p.class} (${p.subclass})` : p.class)].filter(Boolean).join(" · ");
       return `<article class="card ent">
@@ -313,15 +332,17 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
         </div>
         <div class="meta">${p.level ? pill(String(p.level), "Level ") : ""}${pill(p.status)}</div>
         ${p.description ? `<p class="desc">${hl(p.description)}</p>` : ""}
-        ${logList(p.log, 4)}
+        ${logList(p.log, 3)}
       </article>`;
     }).join("");
-    return toolbar(null, "Search the party…") + (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("party members — add them in data/campaign.json"));
+    return toolbar(null, "Search the party…") +
+      (list.length ? `<div class="grid">${cards}</div>${moreBtn(hidden, "characters")}` : emptyMsg("party members — add them in data/campaign.json"));
   };
 
   function entityView(items, what, filters, filterFn) {
-    const list = items.filter(matches).filter(filterFn)
+    const all = items.filter(matches).filter(filterFn)
       .sort((a, b) => (b.last_seen || 0) - (a.last_seen || 0) || a.name.localeCompare(b.name));
+    const { shown: list, hidden } = page(all);
     const cards = list.map(n => `<article class="card ent">
         <h3>${hl(n.name)}</h3>
         ${n.role ? `<div class="role">${hl(n.role)}${n.location ? ` · ${hl(n.location)}` : ""}</div>` : ""}
@@ -330,7 +351,8 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
         ${n.description ? `<p class="desc">${hl(n.description)}</p>` : ""}
         ${logList(n.log)}
       </article>`).join("");
-    return toolbar(filters, `Search ${what}…`) + (list.length ? `<div class="grid">${cards}</div>` : emptyMsg(what));
+    return toolbar(filters, `Search ${what}…`) +
+      (list.length ? `<div class="grid">${cards}</div>${moreBtn(hidden, what)}` : emptyMsg(what));
   }
 
   R.npcs = () => entityView(data.npcs, "NPCs",
@@ -344,9 +366,9 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
 
   R.quests = () => {
     const order = { active: 0, complete: 1, failed: 2 };
-    const list = data.quests.filter(matches)
+    const { shown: list, hidden } = page(data.quests.filter(matches)
       .filter(q => state.filter === "all" || q.status === state.filter)
-      .sort((a, b) => (order[a.status] ?? 3) - (order[b.status] ?? 3) || (b.last_seen || 0) - (a.last_seen || 0));
+      .sort((a, b) => (order[a.status] ?? 3) - (order[b.status] ?? 3) || (b.last_seen || 0) - (a.last_seen || 0)));
     const cards = list.map(q => `<article class="card ent">
         <h3>${hl(q.name)}</h3>
         ${q.giver ? `<div class="role">Given by ${hl(q.giver)}</div>` : ""}
@@ -355,13 +377,13 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
         ${logList(q.log)}
       </article>`).join("");
     return toolbar([["all", "All"], ["active", "Active"], ["complete", "Done"], ["failed", "Failed"]], "Search quests…") +
-      (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("quests"));
+      (list.length ? `<div class="grid">${cards}</div>${moreBtn(hidden, "quests")}` : emptyMsg("quests"));
   };
 
   R.mysteries = () => {
-    const list = data.mysteries.filter(matches)
+    const { shown: list, hidden } = page(data.mysteries.filter(matches)
       .filter(m => state.filter === "all" || (m.status || "open") === state.filter)
-      .sort((a, b) => (a.status === "resolved") - (b.status === "resolved") || (b.opened || 0) - (a.opened || 0));
+      .sort((a, b) => (a.status === "resolved") - (b.status === "resolved") || (b.opened || 0) - (a.opened || 0)));
     const cards = list.map(m => `<article class="card ent">
         <h3>${hl(m.title)}</h3>
         <div class="meta">${pill(m.status || "open")}<span class="pill">Raised S${m.opened}</span>${m.resolved ? `<span class="pill">Solved S${m.resolved}</span>` : ""}</div>
@@ -370,14 +392,14 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
         ${m.clues && m.clues.length ? logList(m.clues, 5) : `<p class="muted" style="margin:0">No clues yet.</p>`}
       </article>`).join("");
     return toolbar([["all", "All"], ["open", "Unsolved"], ["resolved", "Solved"]], "Search mysteries…") +
-      (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("mysteries"));
+      (list.length ? `<div class="grid">${cards}</div>${moreBtn(hidden, "mysteries")}` : emptyMsg("mysteries"));
   };
 
   R.loot = () => {
-    const list = data.loot.filter(matches).sort((a, b) => b.session - a.session);
+    const { shown: list, hidden } = page(data.loot.filter(matches).sort((a, b) => b.session - a.session));
     const rows = list.map(l => `<tr><td>${slink(l.session)}</td><td><b>${hl(l.item)}</b></td><td>${hl(l.holder)}</td><td>${hl(l.description)}</td></tr>`).join("");
     return toolbar(null, "Search loot…") + (list.length
-      ? `<div class="card table-wrap" style="padding:6px 8px"><table><thead><tr><th>Sess.</th><th>Item</th><th>Who has it</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></div>`
+      ? `<div class="card table-wrap" style="padding:6px 8px"><table><thead><tr><th>Sess.</th><th>Item</th><th>Who has it</th><th>Notes</th></tr></thead><tbody>${rows}</tbody></table></div>${moreBtn(hidden, "items")}`
       : emptyMsg("loot"));
   };
 
@@ -389,20 +411,22 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
     const max = ranked.length ? ranked[0][1] : 1;
     const bars = ranked.map(([who, n]) => `<div class="bar"><div><b>${hl(who)}</b></div>
       <div class="track"><div class="fill" style="width:${(n / max * 100).toFixed(1)}%"></div></div><div class="v">${n}</div></div>`).join("");
-    const rows = [...kills].sort((a, b) => b.session - a.session)
+    const { shown: recent, hidden } = page([...kills].sort((a, b) => b.session - a.session));
+    const rows = recent
       .map(k => `<tr><td>${slink(k.session)}</td><td>${hl(k.character)}</td><td>${hl(k.creature)}</td><td>${k.count}</td></tr>`).join("");
     return toolbar(null, "Search by character or creature…") + (ranked.length
       ? `<div class="card"><div class="bars">${bars}</div></div>
          <h2 class="view-title" style="font-size:24px;margin:28px 0 12px">Every kill</h2>
-         <div class="card table-wrap" style="padding:6px 8px"><table><thead><tr><th>Sess.</th><th>Who</th><th>What</th><th>#</th></tr></thead><tbody>${rows}</tbody></table></div>`
+         <div class="card table-wrap" style="padding:6px 8px"><table><thead><tr><th>Sess.</th><th>Who</th><th>What</th><th>#</th></tr></thead><tbody>${rows}</tbody></table></div>${moreBtn(hidden, "kills")}`
       : emptyMsg("kills"));
   };
 
   R.quotes = () => {
-    const list = data.quotes.filter(matches).sort((a, b) => b.session - a.session);
+    const { shown: list, hidden } = page(data.quotes.filter(matches).sort((a, b) => b.session - a.session));
     const cards = list.map(q => `<figure class="card" style="margin:0"><blockquote>${hl(q.text)}</blockquote>
       <figcaption class="qby">— ${hl(q.speaker)}, ${slink(q.session)}</figcaption></figure>`).join("");
-    return toolbar(null, "Search quotes…") + (list.length ? `<div class="grid">${cards}</div>` : emptyMsg("quotes"));
+    return toolbar(null, "Search quotes…") +
+      (list.length ? `<div class="grid">${cards}</div>${moreBtn(hidden, "quotes")}` : emptyMsg("quotes"));
   };
 
   // ---------- shell ----------
@@ -426,6 +450,7 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
 
   function go(view, session) {
     if (view !== state.view) { state.filter = "all"; }
+    state.page = 1;
     state.view = view;
     state.openSession = session ?? null;
     const hash = "#" + view + (session != null ? "/" + session : "");
@@ -446,7 +471,7 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
   }
 
   document.addEventListener("click", e => {
-    const t = e.target.closest("[data-view],[data-session],[data-filter],[data-search],#theme");
+    const t = e.target.closest("[data-view],[data-session],[data-filter],[data-search],[data-more],[data-copy],#theme");
     if (!t) return;
     if (t.id === "theme") {
       const cur = document.documentElement.dataset.theme ||
@@ -458,11 +483,18 @@ footer.wrap { margin: 60px auto 40px; color: var(--ink-3); font-size: 14px; text
     }
     if (t.dataset.view) { state.q = ""; go(t.dataset.view); }
     else if (t.dataset.session) { e.preventDefault(); state.q = ""; go("chronicle", Number(t.dataset.session)); }
-    else if (t.dataset.filter) { state.filter = t.dataset.filter; render(); }
+    else if (t.dataset.filter) { state.filter = t.dataset.filter; state.page = 1; render(); }
+    else if (t.dataset.more) { state.page += 1; render(); }
+    else if (t.dataset.copy) {
+      const url = new URL(`session.html?s=${t.dataset.copy}`, location.href).href;
+      navigator.clipboard?.writeText(url).then(
+        () => { t.textContent = "Link copied!"; setTimeout(() => (t.textContent = "Copy link"), 1800); },
+        () => prompt("Copy this link:", url));
+    }
     else if (t.dataset.search) { state.q = t.dataset.search; go("chronicle"); }
   });
   document.addEventListener("input", e => {
-    if (e.target.id === "q") { state.q = e.target.value.trim(); render(true); }
+    if (e.target.id === "q") { state.q = e.target.value.trim(); state.page = 1; render(true); }
   });
   window.addEventListener("hashchange", fromHash);
 

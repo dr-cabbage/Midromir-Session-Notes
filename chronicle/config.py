@@ -14,6 +14,7 @@ DRAFTS_DIR = ROOT / "drafts"
 
 DEFAULTS = {
     "claude_model": "claude-sonnet-5",
+    "site_url": "",   # e.g. https://yourname.github.io/dnd-chronicle/
     "notes_style": "Informative first, funny second: dry, playful narrator voice, like a party member keeping a journal. Past tense. Never make things up for a joke.",
     "dm_context": "",
     "speakers": {},

@@ -15,7 +15,7 @@ recording ──► transcripts/session-07.txt ──► drafts/session-07.json 
   (you)          (Whisper, on your PC)         (Claude, you can edit)       (merged)           (git push)
 ```
 
-The website is `index.html`. It reads everything from `data/campaign.json`, so you never edit HTML to add a session.
+The website is `index.html` (the whole campaign) plus `session.html` (one session on its own page, for sharing). Both read everything from `data/campaign.json`, so you never edit HTML to add a session.
 
 ---
 
@@ -139,6 +139,37 @@ Regenerating is cheap because the transcript is cached for a few minutes, so rew
 
 **Re-posting a session is safe.** It replaces what that session added before, so you won't get duplicates.
 
+## Sharing one session
+
+Every session has its own page:
+
+```
+https://YOUR-USERNAME.github.io/dnd-chronicle/session.html?s=7
+```
+
+It shows that session's recap, highlights, decisions, who they met, where they went, quest and mystery
+updates, loot, kills, quotes and table talk, plus links to the session before and after. There's a
+**Print / PDF** button too.
+
+Three ways to get the link:
+
+- In the review window, after you post and push, hit **🔗 Copy session link** (fill in `site_url` in `config.yaml` first).
+- On the site, each session card has **Open page ↗** and **Copy link**.
+- Type it yourself: `session.html?s=7`.
+
+Post that link to the group and your DM lands straight on last session's notes.
+
+## Keeping the site readable as sessions pile up
+
+- Long lists load **8 sessions (or 24 cards) at a time**, with a *Show more* button.
+- Each character, NPC, place and quest card shows its **3 most recent session notes**; the rest are behind
+  a *Show N earlier* toggle.
+- Search covers everything on the page, so `dragon` or an NPC's name finds every mention fast.
+- Every note is tagged with its session number and links back to that session's page.
+
+If a page ever feels heavy, the quickest cleanup is to prune or merge old log lines in
+`data/campaign.json`, or add `"aliases"` so duplicate NPCs merge into one card.
+
 ## Editing things by hand
 
 - **A session's notes:** run `python scribe.py review --session NN`, fix things, then Post and Commit & push.
@@ -166,7 +197,8 @@ Regenerating is cheap because the transcript is cached for a few minutes, so rew
 ## Files
 
 ```
-index.html                 the website
+index.html                 the website (whole campaign)
+session.html               one session's own page, for sharing
 data/campaign.json         everything the site shows (the Scribe updates this)
 data/sample-campaign.json  example data for previewing
 drafts/                    Claude's notes per session (committed, easy to edit)

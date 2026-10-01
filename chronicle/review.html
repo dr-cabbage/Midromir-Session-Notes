@@ -130,6 +130,7 @@ aside { display: grid; gap: 16px; align-content: start; position: sticky; top: 7
     <div class="sub" id="h-sub">Loading…</div>
   </div>
   <span class="status-pill" id="posted-pill" hidden>Posted</span>
+  <button class="btn" id="b-link" hidden title="Copy the public link to this session's page">🔗 Copy session link</button>
   <div class="grow"></div>
   <label class="inline">Session date <input type="date" id="date"></label>
   <button class="btn" id="b-save" title="Save your edits without posting">Save draft</button>
@@ -357,6 +358,7 @@ aside { display: grid; gap: 16px; align-content: start; position: sticky; top: 7
     $("h-title").textContent = `Session ${S.session}` + (draft?.session?.title ? `: ${draft.session.title}` : "");
     $("h-sub").textContent = [S.campaign, S.model && `notes by ${S.model}`].filter(Boolean).join(" · ");
     $("posted-pill").hidden = !S.posted;
+    $("b-link").hidden = !(S.posted && S.site_url);
     $("posted-pill").textContent = S.posted ? "In campaign" : "";
     $("b-push").disabled = !S.posted || !S.is_repo;
     $("b-post").textContent = S.posted ? "Update campaign" : "Post to campaign";
@@ -456,8 +458,15 @@ aside { display: grid; gap: 16px; align-content: start; position: sticky; top: 7
     busy(true, "Committing and pushing…", "");
     try {
       const r = await api("/api/commit", { push: true });
-      toast(r.log.join("\n"), !r.ok, 9000);
+      const link = S.site_url ? `\nShare: ${(S.site_url.endsWith("/") ? S.site_url : S.site_url + "/")}session.html?s=${S.session}` : "";
+      toast(r.log.join("\n") + (r.ok ? link : ""), !r.ok, 12000);
     } catch (err) { toast(err.message, true); } finally { busy(false); }
+  };
+  $("b-link").onclick = () => {
+    const base = S.site_url.endsWith("/") ? S.site_url : S.site_url + "/";
+    const url = `${base}session.html?s=${S.session}`;
+    navigator.clipboard?.writeText(url).then(() => toast("Copied:\n" + url, false, 7000),
+      () => prompt("Copy this link:", url));
   };
   $("b-quit").onclick = async () => {
     if (dirty && !confirm("You have unsaved edits. Close anyway?")) return;

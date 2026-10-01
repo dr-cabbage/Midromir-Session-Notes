@@ -47,6 +47,7 @@ class ReviewApp:
             "is_repo": publisher.is_repo(),
             "auto_push": bool(self.cfg.get("auto_push", True)),
             "model": self.cfg.get("claude_model"),
+            "site_url": (self.cfg.get("site_url") or "").strip(),
         }
 
     # ---- actions ----

@@ -4,6 +4,9 @@
 # (about $0.15-0.40 for a 3-4 hour session). Use claude-opus-5 for richer notes.
 claude_model: claude-sonnet-5
 
+# Your GitHub Pages address, so the review window can give you a link to share.
+site_url: "https://YOUR-USERNAME.github.io/dnd-chronicle/"
+
 # How the recap should read.
 notes_style: >
   Informative first, funny second: someone who missed the session should know exactly

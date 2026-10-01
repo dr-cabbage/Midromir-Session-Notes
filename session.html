@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Session notes</title>
+<meta name="description" content="Everything that happened in one session of our D&D campaign.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%93%9C%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4efe4; --panel: #fbf8f1; --panel-2: #efe8d8; --line: #dcd2bc;
+  --ink: #221c2b; --ink-2: #4f4659; --ink-3: #857b8c;
+  --accent: #2f6f73; --ember: #b4532a; --ember-soft: #f3dccf; --gold: #9a7417;
+  --good: #3d7a4a; --bad: #a23b3b;
+  --shadow: 0 1px 2px rgb(40 30 20 / .06), 0 4px 16px rgb(40 30 20 / .05);
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans: "Source Sans 3", -apple-system, "Segoe UI", Roboto, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #15131b; --panel: #1d1a25; --panel-2: #25212f; --line: #342f40;
+    --ink: #ece6f2; --ink-2: #b9b0c4; --ink-3: #7f7690;
+    --accent: #6cc0bf; --ember: #e58a5c; --ember-soft: #3d2519; --gold: #d9b456;
+    --good: #7cc48a; --bad: #e77f7f;
+    --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 6px 20px rgb(0 0 0 / .25);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #15131b; --panel: #1d1a25; --panel-2: #25212f; --line: #342f40;
+  --ink: #ece6f2; --ink-2: #b9b0c4; --ink-3: #7f7690;
+  --accent: #6cc0bf; --ember: #e58a5c; --ember-soft: #3d2519; --gold: #d9b456;
+  --good: #7cc48a; --bad: #e77f7f;
+  --shadow: 0 1px 2px rgb(0 0 0 / .3), 0 6px 20px rgb(0 0 0 / .25);
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.65 var(--sans); }
+a { color: var(--accent); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px; }
+
+.topbar { border-bottom: 1px solid var(--line); background: var(--panel); }
+.topbar .wrap { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px; }
+.home { font-weight: 600; text-decoration: none; }
+.grow { flex: 1; }
+.btn { border: 1px solid var(--line); background: var(--bg); color: inherit; border-radius: 8px; padding: 5px 11px; font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; text-decoration: none; }
+.btn:hover { border-color: var(--ink-3); }
+
+header.hero { padding: 36px 0 22px; border-bottom: 1px solid var(--line); }
+.snum { color: var(--ember); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; }
+h1 { font: 700 clamp(32px, 6vw, 48px)/1.08 var(--serif); margin: 6px 0 10px; }
+.teaser { font-size: 20px; color: var(--ink-2); margin: 0; }
+.when { color: var(--ink-3); font-size: 15px; margin-top: 12px; }
+
+main { padding: 26px 0 40px; }
+.recap p { margin: 0 0 16px; }
+h2 { font: 600 13px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink-3); margin: 34px 0 10px; }
+ul.plain { margin: 0; padding-left: 22px; }
+ul.plain li { margin: 6px 0; }
+.cliff { border-left: 3px solid var(--ember); padding: 12px 16px; background: var(--panel-2); border-radius: 0 10px 10px 0; font-style: italic; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; box-shadow: var(--shadow); margin-bottom: 10px; }
+.card h3 { font: 600 21px/1.2 var(--serif); margin: 0 0 2px; }
+.card .role { color: var(--ink-3); font-size: 14px; margin-bottom: 6px; }
+.card p { margin: 0; }
+.pill { font-size: 12px; font-weight: 600; padding: 2px 9px; border-radius: 999px; background: var(--panel-2); color: var(--ink-2); text-transform: capitalize; margin-left: 6px; }
+.pill.ally, .pill.friendly, .pill.complete, .pill.resolved { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+.pill.hostile, .pill.dead, .pill.fail, .pill.failed { background: color-mix(in srgb, var(--bad) 18%, transparent); color: var(--bad); }
+.pill.suspicious, .pill.open, .pill.start, .pill.clue { background: color-mix(in srgb, var(--gold) 20%, transparent); color: var(--gold); }
+blockquote { margin: 0 0 4px; font: 500 21px/1.35 var(--serif); }
+blockquote::before { content: "\201C"; color: var(--ember); }
+blockquote::after { content: "\201D"; color: var(--ember); }
+.qby { color: var(--ink-3); font-size: 14px; }
+table { width: 100%; border-collapse: collapse; font-size: 15px; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+th { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-3); }
+.nav { display: flex; justify-content: space-between; gap: 12px; margin: 40px 0 10px; border-top: 1px solid var(--line); padding-top: 16px; flex-wrap: wrap; }
+.nav a { text-decoration: none; font-weight: 600; }
+.empty { padding: 40px 20px; text-align: center; color: var(--ink-3); border: 1px dashed var(--line); border-radius: 14px; margin-top: 30px; }
+footer { color: var(--ink-3); font-size: 14px; padding-bottom: 40px; }
+@media print {
+  .topbar, .nav, footer { display: none; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .card { break-inside: avoid; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+<div class="topbar"><div class="wrap">
+  <a class="home" href="index.html">← The whole chronicle</a>
+  <span class="grow"></span>
+  <button class="btn" id="copy">Copy link</button>
+  <button class="btn" id="print">Print / PDF</button>
+  <button class="btn" id="theme" title="Light or dark">◐</button>
+</div></div>
+<header class="hero"><div class="wrap">
+  <div class="snum" id="snum">Session</div>
+  <h1 id="title">Loading…</h1>
+  <p class="teaser" id="teaser"></p>
+  <div class="when" id="when"></div>
+</div></header>
+<main class="wrap" id="main"></main>
+<div class="wrap"><div class="nav" id="nav"></div></div>
+<footer class="wrap" id="foot"></footer>
+
+<script>
+(() => {
+  "use strict";
+  const params = new URLSearchParams(location.search);
+  const DATA_URL = params.get("data") || "data/campaign.json";
+  const want = Number(params.get("s") || location.hash.replace("#", "") || 0);
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const pill = v => v ? `<span class="pill ${esc(String(v).toLowerCase())}">${esc(v)}</span>` : "";
+  const fmtDate = iso => {
+    if (!iso) return "";
+    const d = new Date(iso + "T12:00:00");
+    return isNaN(d) ? esc(iso) : d.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric", year: "numeric" });
+  };
+  const sect = (label, arr) => arr && arr.length
+    ? `<h2>${label}</h2><ul class="plain">${arr.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+  // on an older session's page, a status reflects today, not that night
+  const statusPill = (status, n, s, sessions) => status
+    ? `<span class="pill ${esc(String(status).toLowerCase())}">${n === sessions[sessions.length - 1].number ? "" : "now "}${esc(status)}</span>` : "";
+  const noteFor = (item, n) => (item.log || []).filter(e => e.session === n).map(e => e.text).join(" ");
+
+  try {
+    const saved = localStorage.getItem("chronicle-theme");
+    if (saved) document.documentElement.dataset.theme = saved;
+  } catch (_) {}
+  $("theme").onclick = () => {
+    const cur = document.documentElement.dataset.theme ||
+      (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const next = cur === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try { localStorage.setItem("chronicle-theme", next); } catch (_) {}
+  };
+  $("print").onclick = () => window.print();
+  $("copy").onclick = () => {
+    navigator.clipboard?.writeText(location.href).then(
+      () => { $("copy").textContent = "Link copied!"; setTimeout(() => ($("copy").textContent = "Copy link"), 1800); },
+      () => prompt("Copy this link:", location.href));
+  };
+
+  fetch(DATA_URL, { cache: "no-store" })
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(render)
+    .catch(err => {
+      $("title").textContent = "Couldn't load the notes";
+      $("main").innerHTML = `<div class="empty">Couldn't read <code>${esc(DATA_URL)}</code> (${esc(err.message)}).<br>
+        If you opened this file directly, run <code>python scribe.py serve</code> instead.</div>`;
+    });
+
+  function render(data) {
+    for (const k of ["party", "npcs", "locations", "quests", "mysteries", "loot", "kills", "quotes", "sessions"]) data[k] = data[k] || [];
+    const sessions = [...data.sessions].sort((a, b) => a.number - b.number);
+    if (!sessions.length) {
+      $("title").textContent = "No sessions yet";
+      $("main").innerHTML = `<div class="empty">Nothing has been posted to the chronicle yet.</div>`;
+      return;
+    }
+    const s = sessions.find(x => x.number === want) || sessions[sessions.length - 1];
+    const n = s.number;
+    const campaign = data.campaign || {};
+
+    document.title = `Session ${n}: ${s.title || ""} — ${campaign.title || "Campaign Chronicle"}`;
+    $("snum").textContent = `${campaign.title ? campaign.title + " · " : ""}Session ${n}`;
+    $("title").textContent = s.title || `Session ${n}`;
+    $("teaser").textContent = s.summary || "";
+    $("when").textContent = [fmtDate(s.date), s.in_game_days && `In-world: ${s.in_game_days}`].filter(Boolean).join(" · ");
+
+    const here = list => list.filter(x => (x.log || []).some(e => e.session === n));
+    const npcs = here(data.npcs), places = here(data.locations), quests = here(data.quests);
+    const mysteries = data.mysteries.filter(m => (m.clues || []).some(c => c.session === n) || m.opened === n || m.resolved === n);
+    const party = data.party.filter(p => (p.log || []).some(e => e.session === n));
+    const loot = data.loot.filter(x => x.session === n);
+    const kills = data.kills.filter(x => x.session === n);
+    const quotes = data.quotes.filter(x => x.session === n);
+
+    const prev = sessions.filter(x => x.number < n).pop();
+    const next = sessions.find(x => x.number > n);
+    const entity = (title, role, body) => `<article class="card"><h3>${esc(title)}</h3>
+      ${role ? `<div class="role">${role}</div>` : ""}${body ? `<p>${esc(body)}</p>` : ""}</article>`;
+
+    $("main").innerHTML = `
+      ${prev ? `<p class="when" style="margin:0 0 20px">Previously, in <a href="session.html?s=${prev.number}">session ${prev.number}</a>: ${esc(prev.cliffhanger || prev.summary || "")}</p>` : ""}
+      <div class="recap">${(s.recap || []).map(p => `<p>${esc(p)}</p>`).join("")}</div>
+      ${s.cliffhanger ? `<h2>Where we left off</h2><div class="cliff">${esc(s.cliffhanger)}</div>` : ""}
+      ${sect("Highlights", s.highlights)}
+      ${sect("Big decisions", s.decisions)}
+      ${party.length ? `<h2>The party</h2>` + party.map(p =>
+        entity(p.name, [p.race, p.class].filter(Boolean).join(" · "), noteFor(p, n))).join("") : ""}
+      ${npcs.length ? `<h2>Who they met</h2>` + npcs.map(x =>
+        entity(x.name, [x.role, x.location].filter(Boolean).join(" · ") + pill(x.disposition) + (x.status && x.status !== "alive" ? pill(x.status) : ""), noteFor(x, n))).join("") : ""}
+      ${places.length ? `<h2>Where they went</h2>` + places.map(x => entity(x.name, x.description ? esc(x.description) : "", noteFor(x, n))).join("") : ""}
+      ${quests.length ? `<h2>Quests</h2>` + quests.map(q => entity(q.name, statusPill(q.status, n, s, sessions), noteFor(q, n))).join("") : ""}
+      ${mysteries.length ? `<h2>Mysteries</h2>` + mysteries.map(m => entity(m.title,
+        statusPill(m.status, n, s, sessions) + (m.opened === n ? `<span class="pill">New this session</span>` : "") + (m.resolved === n ? `<span class="pill resolved">Solved</span>` : ""),
+        [(m.clues || []).filter(c => c.session === n).map(c => c.text).join(" "), m.resolved === n ? m.resolution : ""].filter(Boolean).join(" "))).join("") : ""}
+      ${loot.length ? `<h2>Loot</h2><table><thead><tr><th>Item</th><th>Who has it</th><th>Notes</th></tr></thead><tbody>` +
+        loot.map(l => `<tr><td><b>${esc(l.item)}</b></td><td>${esc(l.holder)}</td><td>${esc(l.description)}</td></tr>`).join("") + `</tbody></table>` : ""}
+      ${kills.length ? `<h2>Kill tally</h2><ul class="plain">` +
+        kills.map(k => `<li>${esc(k.character)}: ${k.count}× ${esc(k.creature)}</li>`).join("") + `</ul>` : ""}
+      ${quotes.length ? `<h2>Quotes of the night</h2>` + quotes.map(q =>
+        `<figure class="card" style="margin:0 0 10px"><blockquote>${esc(q.text)}</blockquote><figcaption class="qby">— ${esc(q.speaker)}</figcaption></figure>`).join("") : ""}
+      ${sect("Table talk (not canon)", s.table_talk)}
+    `;
+
+    $("nav").innerHTML =
+      (prev ? `<a href="session.html?s=${prev.number}">← Session ${prev.number}: ${esc(prev.title || "")}</a>` : `<span></span>`) +
+      (next ? `<a href="session.html?s=${next.number}" style="text-align:right">Session ${next.number}: ${esc(next.title || "")} →</a>` : `<span></span>`);
+    $("foot").textContent = `Session ${n} of ${sessions.length} · kept by the Scribe.`;
+  }
+})();
+</script>
+</body>
+</html>
