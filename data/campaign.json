@@ -16,63 +16,296 @@
       "status": "active",
       "description": "Alexander Warden is a protector of truth and the weak.",
       "manual": true,
-      "log": []
+      "log": [
+        {
+          "session": 1,
+          "text": "Took point on negotiations with the tavern owner and the ship's quartermaster, securing free (unpaid) passage for the whole crew. Overperformed at cargo-hauling thanks to his 20 strength, yanking other sailors off their feet, and found a bloodstained cloth hidden in a cargo crate."
+        }
+      ]
     },
     {
-        "id": "ghalen",
-        "name": "Ghalen Mordecai",
-        "player": "John",
-        "race": "Human",
-        "class": "Ranger",
-        "level": 4,
-        "status": "active",
-        "description": "Ghalen is our fearless captain that wears a wolf pelt.",
-        "manual": true,
-        "log": []
+      "id": "ghalen",
+      "name": "Ghalen Mordecai",
+      "player": "John",
+      "race": "Human",
+      "class": "Ranger",
+      "level": 4,
+      "status": "active",
+      "description": "Ghalen is our fearless captain that wears a wolf pelt.",
+      "manual": true,
+      "log": [
+        {
+          "session": 1,
+          "text": "Cast Good Berries and distributed them to the party, held onto Milo's share. Showed off his hand-drawn map, which got a waterway/boat route added by Calazar. Worked deck-scrubbing and kitchen duty aboard the ship."
+        }
+      ]
     },
     {
-        "id": "phineas",
-        "name": "Phineas Fernspark",
-        "player": "T2",
-        "race": "Halfling",
-        "class": "Cleric",
-        "level": 4,
-        "status": "active",
-        "description": "Phineas is our resident cleric who was raised in a cave cult.",
-        "manual": true,
-        "log": []
-      },
-      {
-        "id": "milo",
-        "name": "Milo Dozewell",
-        "player": "Ryan",
-        "race": "Human",
-        "class": "Fighter",
-        "level": 4,
-        "status": "active",
-        "description": "Milo is our sleepyhead who hates his sister.",
-        "manual": true,
-        "log": []
-      },
-      {
-        "id": "calazar",
-        "name": "Calazar Dorento",
-        "player": "Kline",
-        "race": "Sea Elf",
-        "class": "Rogue",
-        "level": 4,
-        "status": "active",
-        "description": "Calazar is our mute rogue with silent shotguns.",
-        "manual": true,
-        "log": []
-      }
+      "id": "phineas",
+      "name": "Phineas Fernspark",
+      "player": "T2",
+      "race": "Halfling",
+      "class": "Cleric",
+      "level": 4,
+      "status": "active",
+      "description": "Phineas is our resident cleric who was raised in a cave cult.",
+      "manual": true,
+      "log": [
+        {
+          "session": 1,
+          "text": "Revealed as the richest party member with 44 gold. Repeatedly angled toward robbing the bank, got caught staking it out and was dragged off by the ear. Later hid in cargo crates instead of helping load the ship."
+        }
+      ]
+    },
+    {
+      "id": "milo",
+      "name": "Milo Dozewell",
+      "player": "Ryan",
+      "race": "Human",
+      "class": "Fighter",
+      "level": 4,
+      "status": "active",
+      "description": "Milo is our sleepyhead who hates his sister.",
+      "manual": true,
+      "log": [
+        {
+          "session": 1,
+          "text": "Absent the entire session (presumed overslept). Strongly implied, via bootprint evidence, to be the one who trashed the Tomoro tavern last time the party was there, though no one connected the dots on screen."
+        }
+      ]
+    },
+    {
+      "id": "calazar",
+      "name": "Calazar Dorento",
+      "player": "Kline",
+      "race": "Sea Elf",
+      "class": "Rogue",
+      "level": 4,
+      "status": "active",
+      "description": "Calazar is our mute rogue with silent shotguns.",
+      "manual": true,
+      "log": [
+        {
+          "session": 1,
+          "text": "Showed off his detailed hand-drawn map, which everyone else was politely obsessed with over Ghalen's. Handled ship rigging duties post-boarding, and smudged a contract detail with dockside water while making a dramatic entrance."
+        }
+      ]
+    }
   ],
-  "npcs": [],
+  "npcs": [
+    {
+      "id": "quartermaster",
+      "name": "Quartermaster",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Reluctantly agreed to take the whole party on as free crew after they signed an unpaid labor contract; promptly fired four veteran sailors to make room for them."
+        }
+      ],
+      "role": "Quartermaster of the merchant ship",
+      "disposition": "neutral",
+      "status": "alive",
+      "location": "Shipyard",
+      "last_seen": 1
+    },
+    {
+      "id": "tavern-owner-tomoro",
+      "name": "Tavern Owner (Tomoro)",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Held Alexander at gunpoint after his tavern was ransacked, and banned the party from returning unless they find the real culprit."
+        }
+      ],
+      "role": "Tavern keeper/bartender",
+      "disposition": "hostile",
+      "status": "alive",
+      "location": "Tomoro",
+      "last_seen": 1
+    },
+    {
+      "id": "the-captain",
+      "name": "The Captain",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "Glimpsed briefly at a distance near the helmsman, face shadowed by a large hat; not yet approached."
+        }
+      ],
+      "role": "Ship's captain",
+      "disposition": "unknown",
+      "status": "unknown",
+      "location": "Aboard the merchant ship",
+      "last_seen": 1
+    }
+  ],
   "locations": [],
-  "quests": [],
-  "mysteries": [],
-  "loot": [],
+  "quests": [
+    {
+      "id": "reach-the-uncharted-landmass",
+      "name": "Reach the Uncharted Landmass",
+      "status": "active",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "The party abandoned overland travel and bank/boat theft plans, ultimately signing on as unpaid ship labor to find passage there, though the ship's actual destination is unconfirmed."
+        }
+      ],
+      "description": "A new unnamed area appeared on the map overnight; the party is trying to reach it.",
+      "giver": "N/A",
+      "last_seen": 1
+    },
+    {
+      "id": "clear-the-party-s-name-in-tomoro",
+      "name": "Clear the Party's Name in Tomoro",
+      "status": "active",
+      "first_seen": 1,
+      "log": [
+        {
+          "session": 1,
+          "text": "The tavern owner refused the party service or help until they prove they didn't do it - complicated by the fact that Milo probably did."
+        }
+      ],
+      "description": "Find the real culprit behind the destroyed tavern in Tomoro to be allowed back into the village.",
+      "giver": "Tavern Owner (Tomoro)",
+      "last_seen": 1
+    }
+  ],
+  "mysteries": [
+    {
+      "id": "what-happened-to-the-tomoro-tavern",
+      "title": "What happened to the Tomoro tavern?",
+      "status": "open",
+      "opened": 1,
+      "clues": [
+        {
+          "session": 1,
+          "text": "Bootprints found at the scene matched Milo's general size and gait, though no party member consciously connected this in-game."
+        }
+      ],
+      "resolution": "",
+      "resolved": null,
+      "description": "The Tomoro tavern was ransacked, allegedly by an animal."
+    },
+    {
+      "id": "what-s-inside-the-bloodstained-cargo-crate",
+      "title": "What's inside the bloodstained cargo crate?",
+      "status": "open",
+      "opened": 1,
+      "clues": [
+        {
+          "session": 1,
+          "text": "The cloth resembled a protective wrap used to keep something safe during transport; Alexander marked the crate to investigate further at night."
+        }
+      ],
+      "resolution": "",
+      "resolved": null,
+      "description": "Alexander found a bloodstained cloth wrap hidden inside a sealed, leather-strapped cargo crate while loading the ship."
+    },
+    {
+      "id": "who-is-the-ship-s-captain",
+      "title": "Who is the ship's captain?",
+      "status": "open",
+      "opened": 1,
+      "clues": [],
+      "resolution": "",
+      "resolved": null,
+      "description": "A large, intimidating captain was seen briefly near the helmsman, face obscured by a wide-brimmed hat."
+    }
+  ],
+  "loot": [
+    {
+      "session": 1,
+      "item": "Good Berries",
+      "holder": "party",
+      "description": "Distributed by Ghalen to the party (two each), with Milo's portion held onto by Ghalen."
+    },
+    {
+      "session": 1,
+      "item": "Unpaid ship labor contract",
+      "holder": "Quartermaster",
+      "description": "Signed agreement granting the party free passage on the merchant ship in exchange for labor; a stray water drop smudged a key detail (compensation or employment length)."
+    }
+  ],
   "kills": [],
-  "quotes": [],
-  "sessions": []
+  "quotes": [
+    {
+      "session": 1,
+      "speaker": "Calazar",
+      "text": "We disguise ourselves and then we go outside and find a place where they trade money for goods and services and we take all the money."
+    },
+    {
+      "session": 1,
+      "speaker": "Alexander",
+      "text": "Sorry to frighten you."
+    },
+    {
+      "session": 1,
+      "speaker": "Tavern Owner",
+      "text": "You guys are not welcome here."
+    },
+    {
+      "session": 1,
+      "speaker": "Alexander",
+      "text": "Alexander Warden, protector of the people... We only need travel. No compensation is required."
+    },
+    {
+      "session": 1,
+      "speaker": "DM",
+      "text": "Be careful hiding under large cargo - cargo can shift while the boat is on the water."
+    }
+  ],
+  "sessions": [
+    {
+      "number": 1,
+      "date": "2026-09-16",
+      "title": "Signed, Sealed, and Underpaid",
+      "summary": "The party abandons a plan to walk two days to a mysterious new landmass, gets kicked out of a village they may have accidentally traumatized, and ends up signing an unpaid labor contract just to get a boat ride.",
+      "recap": [
+        "The party gathered after a long rest in Port Plywood, having noticed a strange new unnamed area appear on the map overnight. With Milo mysteriously absent (presumed asleep, possibly dead - nobody checked too hard), the group debated how to reach the far side of the island, since Calazar's shiny new hand-drawn map showed no direct route by land or sea.",
+        "Ideas ranged from the practical (hitchhiking, buying a boat) to the deeply impractical (robbing a bank, staging a mutiny to steal a ship). Phineas in particular could not let go of the bank heist idea, going so far as to \"scout\" the bank in person, use its bathroom, and then get caught staring at it suspiciously before Alexander physically dragged him away by the ear.",
+        "The party settled on traveling to the town of Tomoro (formerly 'Tomorrow,' renamed by the DM to save map space) to try to borrow horses and a carriage. Unfortunately, Tomoro remembered them: last time the party visited, Phineas (in cat form at the time) had convinced the town he was a murderer via a catastrophically bad deception roll, and the townsfolk had watched them clean up a bar fight while keeping a terrified distance the whole time.",
+        "Arriving in Tomoro, the party found villagers cleaning up a destroyed tavern - the actual culprit was Milo, though nobody present recognized his bootprints as his despite a strong investigation roll. The tavern owner, at gunpoint-negotiating distance, made clear the party was not welcome back unless they found the real culprit, and did not appreciate Calazar's insistence that 'not all four' of them were criminals.",
+        "With Tomoro closed to them and no horses forthcoming, the party pivoted (again) to the shipyard, using Calazar's map to identify a possible sea route. None of the five ships on offer were remotely affordable, so the party leaned into being 'mercenaries' and instead negotiated free passage in exchange for labor - Alexander handling negotiations while flexing his 20 strength and general obliviousness to how contracts work.",
+        "The quartermaster had everyone sign an employment agreement with zero compensation and an unspecified end date. A stray drop of water from Calazar's dramatic dockside entrance smudged the contract's crucial details, though it's unclear if this will matter later. The signed sailors immediately replaced a group of four unhappy, presumably mutiny-planning veteran sailors, who were fired on the spot and sent off looking bitter.",
+        "The party got to work: Alexander overperformed at hauling cargo (accidentally yanking other sailors off their feet), Calazar handled rigging like the sea elf he is, Galen scrubbed decks and cooked, and Phineas immediately found a hiding spot in the cargo crates and did essentially nothing.",
+        "While hauling boxes, Alexander noticed one crate was packed with a bloodstained cloth wrap hidden among the cargo. He tugged it partway out before it caught resistance, marked the crate with a notch to identify it later, and decided to investigate further at night - a loose thread the party may want to pull on again.",
+        "As the ship set sail, the party caught a glimpse of an intimidating, shadow-faced captain standing near the helmsman, though nobody got close enough to learn anything more. The session ended with the ship pulling away from port, destination uncertain, cargo secrets unresolved, and the ominous DM-provided trailer tip: 'Be careful hiding under large cargo - cargo can shift while the boat is on the water.'"
+      ],
+      "highlights": [
+        "Phineas floated (and repeatedly circled back to) robbing the bank, culminating in him being dragged away by the ear mid-stakeout.",
+        "Phineas peed on the outside wall of the bank after a 'roll for luck,' getting the worst possible roll.",
+        "Alexander tried to kneel apologetically in front of a terrified villager sweeping glass, rolled a natural 20 to avoid the glass with his knee, only for her to have already fled in terror.",
+        "The tavern owner held Alexander at gunpoint over the ransacked bar - actually Milo's doing - while the party bickered over whether 'all four' of them were criminals.",
+        "Alexander negotiated an unpaid labor contract for the whole party while insisting they needed 'no compensation,' shushing Galen when he tried to ask about pay.",
+        "Alexander's 20 strength turned cargo-hauling into a hazard, yanking other sailors clean off their feet.",
+        "Phineas immediately abandoned all responsibility and hid inside the ship's cargo crates for the whole loading sequence.",
+        "Alexander discovered a bloodstained cloth hidden inside a sealed cargo crate and marked it to investigate later."
+      ],
+      "decisions": [
+        "Abandoned plans to walk two days, rob a bank, or steal a ship outright.",
+        "Chose not to seek help from Tomoro after learning the town feared and distrusted them.",
+        "Signed an unpaid labor contract to secure free passage on a merchant ship rather than paying for one.",
+        "Alexander decided not to immediately report or fully investigate the bloody cloth found in the cargo, planning to return to it later."
+      ],
+      "cliffhanger": "The ship has set sail toward parts unknown with a mysterious blood-stained item hidden in the cargo hold, an intimidatingly shadow-faced captain nobody's spoken to yet, and a warning that cargo can shift dangerously at sea - right where Phineas is hiding.",
+      "in_game_days": "About half a day, ending with the ship's departure",
+      "table_talk": [
+        "Extended tangent about robbing convenience stores vs. banks vs. 'the Guild.'",
+        "Debate over whether Good Berries look like angry cherry bombs from Plants vs. Zombies or homies from Big Mom's feast in One Piece.",
+        "Long derail about the party's earlier brothel visit, terrible attractiveness rolls, and someone allegedly getting syphilis in the bath.",
+        "DM's saga of accidentally hitting the Discord map update button and revealing spoiler place names.",
+        "Riffing on Calazar's ink-cloud ability being useless outside water and just making him an obvious paint bomb.",
+        "Random tangent about Rocket League boost mechanics applied to Calazar's underwater ink ability.",
+        "Off-topic chat about Cores Light beer cheese Pringles and blue raspberry candy.",
+        "Joke about the fired sailors being 'about to level up' and get a mutiny pension before getting canned."
+      ],
+      "source": ""
+    }
+  ],
+  "updated": "2026-09-30T19:29:28"
 }
