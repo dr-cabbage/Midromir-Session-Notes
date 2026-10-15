@@ -1,5 +1,7 @@
 anthropic>=0.60
 faster-whisper>=1.1
+# PyAV 15+ removed an option faster-whisper still passes, so keep it on the older line.
+av>=12,<15
 soundcard>=0.4.3
 numpy
 PyYAML>=6

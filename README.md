@@ -118,6 +118,7 @@ This transcribes the recording and has Claude write a draft. Then a **review win
 | **Tell Claude what to fix** | Type corrections, e.g. "The bartender fight was a joke" or "make the dragon part funnier". |
 | **↻ Regenerate** | Claude rewrites the whole draft using your cuts, answers and notes. It remembers them for this session, so later rewrites keep them. |
 | **Check the transcript** | Search what was actually said. |
+| **📣 Share draft** | Pushes just the draft to the website so the group can read it at `draft.html?s=N`. |
 | **Post to campaign** | Adds the notes to `data/campaign.json`. Cut items are dropped. |
 | **Commit & push** | Publishes to GitHub Pages. |
 | **Close** | Ends the review. Your draft is saved. |
@@ -138,6 +139,23 @@ Useful options:
 Regenerating is cheap because the transcript is cached for a few minutes, so rewrites after the first draft cost much less.
 
 **Re-posting a session is safe.** It replaces what that session added before, so you won't get duplicates.
+
+## Letting the group check the notes first
+
+The review window runs only on your PC, so nobody else can open it. Instead, push the draft to the
+website and let everyone read the same thing you're looking at:
+
+1. In the review window, hit **📣 Share draft**. It commits and pushes *only* the draft files — nothing
+   joins the chronicle yet — and copies the link:
+   `https://YOUR-USERNAME.github.io/dnd-chronicle/draft.html?s=7`
+2. Post that link in your group chat. The page is marked **DRAFT — not published yet**, lists Claude's
+   open questions for the table, and refreshes itself every 25 seconds.
+3. While you talk it over, cut things, type their corrections into **Tell Claude what to fix** and hit
+   **↻ Regenerate**, then **📣 Share draft** again. They press **Refresh now** (or wait) and see your new version.
+4. When everyone's happy: **Post to campaign** → **Commit & push**. The draft page then turns green and
+   points at the published session.
+
+GitHub Pages can take a minute to serve a new push, so give it a moment before telling people to refresh.
 
 ## Sharing one session
 
@@ -199,6 +217,7 @@ If a page ever feels heavy, the quickest cleanup is to prune or merge old log li
 ```
 index.html                 the website (whole campaign)
 session.html               one session's own page, for sharing
+draft.html                 a draft the group can read before it's published
 data/campaign.json         everything the site shows (the Scribe updates this)
 data/sample-campaign.json  example data for previewing
 drafts/                    Claude's notes per session (committed, easy to edit)

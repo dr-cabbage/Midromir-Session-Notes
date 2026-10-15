@@ -48,6 +48,8 @@ class ReviewApp:
             "auto_push": bool(self.cfg.get("auto_push", True)),
             "model": self.cfg.get("claude_model"),
             "site_url": (self.cfg.get("site_url") or "").strip(),
+            "draft_url": self.draft_url(),
+            "shared_at": pipeline.load_meta(self.n).get("shared_at", ""),
         }
 
     # ---- actions ----
@@ -111,6 +113,29 @@ class ReviewApp:
         except Exception as exc:
             return {"ok": False, "log": [f"Error: {exc}"]}
 
+    def share(self, body: dict) -> dict:
+        """Push just the draft files, so the group can read them on the site."""
+        try:
+            if body.get("draft") is not None:
+                pipeline.save_draft(self.n, body["draft"])
+            pipeline.save_meta(self.n, shared_at=dt.datetime.now().astimezone().isoformat(timespec="seconds"))
+            publisher.pull()
+            draft = pipeline.load_draft(self.n) or {}
+            title = draft.get("session", {}).get("title", "")
+            ok, msg = publisher.publish(f"Session {self.n} draft for review: {title}",
+                                        [pipeline.draft_path(self.n), pipeline.meta_path(self.n),
+                                         pipeline.feedback_path(self.n)],
+                                        push_after=True)
+            return {"ok": ok, "log": [msg], "url": self.draft_url()}
+        except Exception as exc:
+            return {"ok": False, "log": [f"Error: {exc}"]}
+
+    def draft_url(self) -> str:
+        base = (self.cfg.get("site_url") or "").strip()
+        if not base:
+            return ""
+        return f"{base.rstrip('/')}/draft.html?s={self.n}"
+
     def commit_push(self, body: dict) -> dict:
         draft = pipeline.load_draft(self.n) or {}
         title = draft.get("session", {}).get("title", "")
@@ -126,6 +151,7 @@ def _handler(app: ReviewApp):
         "/api/regenerate": app.regenerate,
         "/api/forget": app.forget,
         "/api/post": app.post,
+        "/api/share": app.share,
         "/api/commit": app.commit_push,
     }
 
