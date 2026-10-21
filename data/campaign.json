@@ -24,6 +24,10 @@
         {
           "session": 2,
           "text": "Loaded cargo, rigged sails, found the bloodstained cloth in a crate, handed out Ghalen's excellent cooking, tried to sneak a snack before lunch and got scolded, and accidentally shot the quartermaster Quart dead through a door after Phineas's loud knocking. Later knocked Gravestone out cold to keep him quiet and ended up holding one of the stolen heart fruits."
+        },
+        {
+          "session": 3,
+          "text": "Spent much of the session as unofficial janitor, repeatedly acing cleaning checks on the gore-covered stairs. Lost his grip on unconscious Phineas while trying to wake him with seawater and dove overboard after him, leaving him stranded in open water far behind the ship by session's end. Kept one of the four heart fruits in his bag."
         }
       ]
     },
@@ -45,6 +49,10 @@
         {
           "session": 2,
           "text": "Cooked an excellent lunch (nat 20), handed out rotten-food 'justice' to Skidmark and Butt Stuff for their harassment and threats, killed Fishfucker, and later helped harvest hearts from Forehead, Butt Stuff, Fishfucker, and Skidmark to replace the stolen heart fruits."
+        },
+        {
+          "session": 3,
+          "text": "Took over steering the ship after Hairbrush fled the helm in terror. Fought Captain Fishbone with crossbow shots and Hunter's Mark, and panicked when Phineas's astral projection caused his body to collapse. Holding three of the four heart fruits."
         }
       ]
     },
@@ -66,6 +74,10 @@
         {
           "session": 2,
           "text": "Hid in cargo to dodge work, got weak-kneed over Ghalen's cooking, knocked loudly and annoyingly on the captain's door (leading to Quart's accidental death), then executed Forehead and Skidmark, blew out Gravestone's suicidal dynamite with Gust of Wind, and helped harvest the replacement hearts."
+        },
+        {
+          "session": 3,
+          "text": "Used an astral projection herb mid-crisis, knocking himself unconscious for ten minutes and indirectly causing himself and Alexander to be swept overboard and stranded."
         }
       ]
     },
@@ -87,6 +99,10 @@
         {
           "session": 2,
           "text": "Slept through boarding and used a Firefly transformation charge to sneak aboard, got discovered hiding in a hammock, and later held Forehead down so Phineas could finish him off for his heart."
+        },
+        {
+          "session": 3,
+          "text": "Overslept yet again and had to sneak aboard via firefly form last session; this session he arrived late to the fight against Fishbone, got dropped to 1 HP by a brutal critical hit, got revived with a goodberry, then turned the tide by relentlessly rage-baiting and eventually grappling and throwing Fishbone overboard."
         }
       ]
     },
@@ -108,6 +124,10 @@
         {
           "session": 2,
           "text": "Investigated the marked cargo crate and found four stolen heart fruits, decapitated Butt Stuff, and later Wild Shaped into a cuttlefish to sneak into the locked captain's quarters, finding documents proving the ship is deliberately sailing to the Rat Folk Kingdom instead of the party's destination."
+        },
+        {
+          "session": 3,
+          "text": "Botched an anchor drop that snapped the rope, crushed Gravestone, and woke the captain, then took heavy gunfire from Fishbone and was knocked to critical HP in the ensuing fight."
         }
       ]
     }
@@ -169,14 +189,18 @@
         {
           "session": 2,
           "text": "Finally introduced himself after enjoying Ghalen's cooking (19/20). Remained suspicious of the string of crew deaths but mostly shrugged them off as long as the cargo still gets delivered. His quarters were secretly searched by Calazar."
+        },
+        {
+          "session": 3,
+          "text": "Woke up furious after the anchor incident, fought Calazar, Galen, and Milo in a running gun-and-sword battle across the deck, and was ultimately thrown overboard by Milo near the rocky coastline after being poisoned with shark meat. Last seen treading water and glaring at the departing ship - his death or capture was not confirmed."
         }
       ],
-      "role": "Ship's captain",
-      "disposition": "suspicious",
-      "status": "alive",
-      "description": "The ship's secretive captain, always concealed by a coat and cavalier hat. Oddly particular about the fish he eats and entirely unbothered by his crew dying around him.",
-      "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "role": "Ship's captain (crew-facing)",
+      "disposition": "hostile",
+      "status": "unknown",
+      "description": "The ship's cook/crew-facing captain figure, previously charmed by Galen's cooking.",
+      "location": "In the water near coastal cliffs",
+      "last_seen": 3
     },
     {
       "id": "quart",
@@ -203,14 +227,18 @@
         {
           "session": 2,
           "text": "Held down by Milo and finished off by Phineas with an Eldritch Blast so his heart could be harvested as one of the four replacement hearts."
+        },
+        {
+          "session": 3,
+          "text": "His corpse's heart was harvested to replace one of the stolen heart fruits, and his body was weighted with a cannonball and dumped overboard."
         }
       ],
-      "role": "Helmsman / new quartermaster",
+      "role": "Helmsman / Quartermaster",
       "disposition": "neutral",
       "status": "dead",
-      "description": "The ship's helmsman, and Quart's younger brother who briefly inherited the quartermaster role.",
+      "description": "Helmsman and Court's younger brother, briefly inherited the quartermaster role before dying.",
       "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "last_seen": 3
     },
     {
       "id": "gravestone",
@@ -220,14 +248,18 @@
         {
           "session": 2,
           "text": "Mostly blind, helped throw Quart's body overboard, then had a suicidal frenzy after the murders started, lighting a stick of dynamite before Phineas blew it out with Gust of Wind. Was knocked unconscious by Alexander to keep him quiet."
+        },
+        {
+          "session": 3,
+          "text": "Woke up and nearly reached for a weapon, was tackled and intimidated into submission by Calazar and frozen by Alexander's Command spell, tied up and gagged - then crushed to death by falling crates when the anchor snapped."
         }
       ],
       "role": "Gunner",
       "disposition": "neutral",
-      "status": "alive",
-      "description": "Elderly halfling gunner in charge of the ship's cannons.",
-      "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "status": "dead",
+      "description": "Elderly blind gunner, previously knocked out by Alexander.",
+      "location": "Below deck",
+      "last_seen": 3
     },
     {
       "id": "hairbrush",
@@ -237,14 +269,18 @@
         {
           "session": 2,
           "text": "Too scared and distracted to notice the murders happening around him; got forced to take the ship's wheel by the captain mid-crisis."
+        },
+        {
+          "session": 3,
+          "text": "Was forced to take the helm, panicked the whole time, got a crayon map shoved in his face by Ghalen, fled from the wheel convinced the party was insane, and spent the rest of the session cowering in the kitchen."
         }
       ],
-      "role": "Deckhand / rookie sailor",
-      "disposition": "neutral",
+      "role": "Deckhand / reluctant helmsman",
+      "disposition": "friendly",
       "status": "alive",
-      "description": "The newest crew recruit, only a week into sailing, searching for his long-lost fiancee who was lost at sea.",
-      "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "description": "Rookie deckhand searching for his long-lost fiance.",
+      "location": "Ship kitchen",
+      "last_seen": 3
     },
     {
       "id": "skidmark",
@@ -254,14 +290,18 @@
         {
           "session": 2,
           "text": "Fed rotten food in retaliation for threatening Phineas, passed out drunk during the chaos, and was ultimately killed by Phineas so his heart could be harvested as one of the four replacement hearts."
+        },
+        {
+          "session": 3,
+          "text": "Corpse harvested for a replacement heart and disposed of overboard."
         }
       ],
       "role": "Deckhand",
       "disposition": "hostile",
       "status": "dead",
-      "description": "A drunk, foul-smelling crewmate who pulled a gun on Phineas as a 'prank' and was generally unpleasant.",
+      "description": "Drunk old-timer deckhand.",
       "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "last_seen": 3
     },
     {
       "id": "butt-stuff",
@@ -271,14 +311,18 @@
         {
           "session": 2,
           "text": "Decapitated by Calazar; his heart was later harvested to replace one of the stolen fruit."
+        },
+        {
+          "session": 3,
+          "text": "Corpse harvested for a replacement heart and disposed of overboard with a cannonball weight."
         }
       ],
       "role": "Deckhand",
       "disposition": "hostile",
       "status": "dead",
-      "description": "A crewmate below decks who flirted with and tried to kiss Alexander.",
+      "description": "Deckhand who previously flirted with Alexander.",
       "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "last_seen": 3
     },
     {
       "id": "fishfucker",
@@ -288,14 +332,34 @@
         {
           "session": 2,
           "text": "Fed rotten food but suffered no ill effects. Was later killed by Ghalen during the chaos below deck so his heart could be harvested."
+        },
+        {
+          "session": 3,
+          "text": "Corpse harvested for a replacement heart and disposed of overboard."
         }
       ],
       "role": "Deckhand",
       "disposition": "neutral",
       "status": "dead",
-      "description": "A nervous, mute deckhand.",
+      "description": "Nervous mute deckhand.",
       "location": "The merchant ship (Copper Tide)",
-      "last_seen": 2
+      "last_seen": 3
+    },
+    {
+      "id": "court",
+      "name": "Court",
+      "first_seen": 3,
+      "log": [
+        {
+          "session": 3,
+          "text": "Referenced as already dead from the prior session's events; his heart and body were part of the cover-up handled this session."
+        }
+      ],
+      "role": "Quartermaster",
+      "disposition": "neutral",
+      "status": "dead",
+      "description": "Barely-red-haired quartermaster.",
+      "last_seen": 3
     }
   ],
   "locations": [],
@@ -313,11 +377,15 @@
         {
           "session": 2,
           "text": "The party boarded the merchant ship Copper Tide to reach their destination, but Calazar discovered documents proving the ship is actually sailing toward the Rat Folk Kingdom - not where the party intended to go. They have about two hours before passing the point of no return to redirect the ship."
+        },
+        {
+          "session": 3,
+          "text": "The party's attempt to redirect the ship toward the correct port (instead of the Rat Folk Kingdom) led to chaos: the crew is dead, the captain overboard, and the group now split between the ship and open water."
         }
       ],
       "description": "A new unnamed area appeared on the map overnight; the party is trying to reach it.",
       "giver": "N/A",
-      "last_seen": 2
+      "last_seen": 3
     },
     {
       "id": "clear-the-party-s-name-in-tomoro",
@@ -328,11 +396,15 @@
         {
           "session": 1,
           "text": "The tavern owner refused the party service or help until they prove they didn't do it - complicated by the fact that Milo probably did."
+        },
+        {
+          "session": 3,
+          "text": "No direct progress this session, but the body count keeps climbing, making this an increasingly tall order whenever they return."
         }
       ],
       "description": "Find the real culprit behind the destroyed tavern in Tomoro to be allowed back into the village.",
       "giver": "Tavern Owner (Tomoro)",
-      "last_seen": 1
+      "last_seen": 3
     },
     {
       "id": "dispose-of-the-stolen-heart-fruits-discreetly",
@@ -343,9 +415,13 @@
         {
           "session": 2,
           "text": "After finding four stolen 'heart fruit' in a marked cargo crate, the party took them and tried to cover their tracks by killing four crewmates (Forehead, Butt Stuff, Fishfucker, and Skidmark) to harvest replacement hearts of matching weight, hiding the bodies in hammocks to dump overboard once the ship docks."
+        },
+        {
+          "session": 3,
+          "text": "The party harvested hearts from four dead crewmates to disguise the theft and weighted their bodies with cannonballs for a planned burial at sea."
         }
       ],
-      "last_seen": 2
+      "last_seen": 3
     }
   ],
   "mysteries": [
@@ -382,7 +458,7 @@
     {
       "id": "who-is-the-ship-s-captain",
       "title": "Who is the ship's captain?",
-      "status": "open",
+      "status": "resolved",
       "opened": 1,
       "clues": [
         {
@@ -390,8 +466,8 @@
           "text": "The captain goes by Captain Fishbone, always wears a face-concealing coat and hat, seems unfazed by multiple crew deaths, and is secretly steering the ship toward the Rat Folk Kingdom according to documents found in his quarters."
         }
       ],
-      "resolution": "",
-      "resolved": null,
+      "resolution": "Captain Fishbone",
+      "resolved": 3,
       "description": "A large, intimidating captain was seen briefly near the helmsman, face obscured by a wide-brimmed hat."
     },
     {
@@ -429,6 +505,24 @@
       "item": "Documents on the ship's true destination",
       "holder": "Calazar Dorento",
       "description": "Papers found in the captain's quarters proving the ship was specifically sought out for its cargo run and is secretly headed to the Rat Folk Kingdom."
+    },
+    {
+      "session": 3,
+      "item": "Heart Fruits (x4)",
+      "holder": "party",
+      "description": "Stolen beating heart fruits from the cargo hold, now replaced in the crate with harvested human hearts to hide the theft; three held by Galen, one kept by Alexander in his bag."
+    },
+    {
+      "session": 3,
+      "item": "Stolen ship documents/maps",
+      "holder": "Calazar",
+      "description": "Papers and ledgers taken from Captain Fishbone's quarters proving the ship's secret course to the Rat Folk Kingdom."
+    },
+    {
+      "session": 3,
+      "item": "Crayon-drawn map",
+      "holder": "Phineas",
+      "description": "A hand-drawn map Phineas used (unsuccessfully) to try to redirect Hairbrush's steering; slightly crumpled and torn after Phineas's astral-projection collapse, but later smoothed out."
     }
   ],
   "kills": [
@@ -454,6 +548,36 @@
       "session": 2,
       "character": "Calazar Dorento",
       "creature": "Butt Stuff (crewmate, decapitated)",
+      "count": 1
+    },
+    {
+      "session": 3,
+      "character": "party",
+      "creature": "Forehead",
+      "count": 1
+    },
+    {
+      "session": 3,
+      "character": "Phineas",
+      "creature": "Skidmark",
+      "count": 1
+    },
+    {
+      "session": 3,
+      "character": "Galen",
+      "creature": "Fishfucker",
+      "count": 1
+    },
+    {
+      "session": 3,
+      "character": "Phineas",
+      "creature": "Forehead (finishing blow)",
+      "count": 1
+    },
+    {
+      "session": 3,
+      "character": "party",
+      "creature": "Gravestone (killed by falling crates after anchor snapped)",
       "count": 1
     }
   ],
@@ -502,6 +626,31 @@
       "session": 2,
       "speaker": "Milo",
       "text": "What am I gonna do with the heart?"
+    },
+    {
+      "session": 3,
+      "speaker": "Alexander",
+      "text": "When you're a mercenary, you know, there's always a guy at the bottom of the totem pole, always cleaning up poop. That was me for a bit. Everybody's got to start there at some point."
+    },
+    {
+      "session": 3,
+      "speaker": "DM",
+      "text": "He has a Zoro moment where he opens his eyes in the last quarter second and just catches himself."
+    },
+    {
+      "session": 3,
+      "speaker": "Milo",
+      "text": "I hope he can swim better than you can pilot a ship."
+    },
+    {
+      "session": 3,
+      "speaker": "Table",
+      "text": "Don't do drugs. Somebody might throw you overboard."
+    },
+    {
+      "session": 3,
+      "speaker": "DM",
+      "text": "He keeps hitting me in the dick."
     }
   ],
   "sessions": [
@@ -581,7 +730,46 @@
       "in_game_days": "",
       "table_talk": [],
       "source": ""
+    },
+    {
+      "number": 3,
+      "date": "2026-10-21",
+      "title": "Anchors Away (Permanently)",
+      "summary": "The party murdered the rest of the crew, tried to cover it up, and then lost the ship anyway when a botched wake-up call sent Phineas, Alexander, and the anchor overboard.",
+      "recap": [
+        "The session picked up mid-cover-up: with four stolen heart fruits needing replacements and a growing pile of corpses from last session's 'charitable' crew incident, the party decided the cleanest solution was to harvest hearts from the dead to disguise the theft, then dump the bodies overboard once the ship docked. Alexander loaded cannonballs into the hammocks of the deceased (Forehead, Butt Stuff, Fishfucker, and Skidmark) to weigh them down for a later burial at sea, while Phineas drew the short straw and was sent up top with Galen to deal with the ship's remaining problems: Hairbrush at the helm and an unmet, increasingly suspicious captain.",
+        "Before the heart-harvesting wrapped up, Gravestone - the blind gunner, already rattled by the chaos - woke up and nearly went for a weapon. Calazar tackled him silently, Alexander hit him with Command to freeze him in place, and the party tied and gagged him rather than add a fifth body to the pile. Meanwhile Alexander spent a very productive skill check scrubbing the poop-and-blood-covered stairs spotless (a recurring bit for the rest of the session), while Phineas skated gracefully through the muck on his way up to confront Hairbrush.",
+        "Topside, Ghalen slapped a crayon-drawn map in Hairbrush's face trying to redirect the ship, only for the terrified helmsman to swat it away and eventually abandon the wheel entirely, convinced the party was insane. Ghalen took over steering and Phineas took over navigation, with both of them rolling consistently excellent Survival checks to keep the ship on course toward the preferred port instead of the Rat Folk Kingdom.",
+        "Wanting a scouting edge, Phineas used an astral projection herb to send his soul up to the crow's nest without telling anybody - and his body immediately crumpled to the deck, unconscious for a full ten minutes. Galen, alarmed, tried slapping him awake, then force-fed him a goodberry (no effect on an unconscious target), then punched him once for good measure (it did not help). Growing desperate, Alexander carried Phineas to the railing to dunk him in seawater to wake him up, lost his grip, and watched his unconscious friend plunge into the ocean - so he dove in after him.",
+        "With the ship now sailing on without its paladin and cleric, Calazar tried to drop anchor to stop the ship and rescue them. The anchor rope snapped on a natural 1, violently jolting the entire ship, knocking Calazar prone, and dropping a stack of crates that crushed the tied-up, helpless Gravestone to death below deck. The noise also woke Captain Fishbone, who stormed out furious and immediately rolled initiative against Calazar and Galen.",
+        "The resulting firefight was brutal: Fishbone's gun shredded Calazar down to critical HP within a couple of rounds (he has an unfortunate glass-cannon), while Milo - arriving late to the chaos after hearing gunshots - got dropped to 1 HP via a devastating max-damage crit before being revived with the party's dwindling goodberries. Milo spent much of the fight magnificently rage-baiting Fishbone (literally punching him repeatedly in the groin while Ghalen peppered him with crossbow bolts), eventually grappling him, feeding him poisoned shark meat, and ultimately hurling him bodily off the side of the ship into the sea near the cliffs.",
+        "Meanwhile, Alexander and Phineas were left floating in open water hundreds of feet behind the fleeing ship, with no way to catch up and no way to communicate with the others. With Phineas still unconscious and Alexander a famously bad swimmer, the two were effectively marooned and left to make their own way toward shore.",
+        "With the ship crew (and most of the original crew entirely) now reduced to Galen, Milo, and Calazar aboard and steering toward port, and Alexander and Phineas stranded separately in the water, the group decided to split the next two sessions: one following Galen and Milo (and presumably Calazar) continuing on the ship toward the previously-planned halfway-point town, and one following Alexander and Phineas making their way through the wilderness on foot - mirroring the overland route the party originally considered back in session 1."
+      ],
+      "highlights": [
+        "Alexander scored a sparkling 19 on cleaning checks to scrub the crime-scene stairs spotless - twice.",
+        "Phineas smoking an astral herb immediately before danger and faceplanting his body for ten full minutes, directly kicking off the whole overboard disaster.",
+        "Milo's relentless rage-baiting of Captain Fishbone, including repeatedly punching him in the groin with sneak-attack-boosted damage.",
+        "The anchor's rope snapping on a natural 1, crushing the tied-up Gravestone under falling crates and waking the captain.",
+        "Milo heaving Fishbone bodily over the side of the ship near the cliffs to end the fight."
+      ],
+      "decisions": [
+        "The group opted to spare Gravestone by tying and gagging him instead of killing him.",
+        "The party agreed to split into two parallel sessions next: one following Galen/Milo/Calazar on the ship, one following Alexander/Phineas overland."
+      ],
+      "cliffhanger": "The ship sails on toward port with only Galen, Milo, and Calazar aboard (plus a traumatized Hairbrush hiding in the kitchen), while Alexander and Phineas are stranded hundreds of feet behind in open water with no way to catch up - the party is splitting into two groups for the next sessions.",
+      "in_game_days": "",
+      "table_talk": [
+        "Debate over realistic cannonball weights for the corpse-weighing plan, including looking up historical naval gun calibers.",
+        "Joke about an 'Office'-style cutaway interview with Alexander explaining his poop-cleaning backstory as a mercenary.",
+        "Comparing Phineas's astral projection ability to Brook from One Piece carrying his skeleton around separately from his ghost.",
+        "Riffing on movie anchor-drop tropes and whether you'd just cut the rope instead of lowering it.",
+        "Milo and the table joking about getting a boat 'fixed' for free since Fishbone 'owes him a debt' for being saved from drowning.",
+        "DM revealing he'd already built a town map for a 'halfway point' originally meant for the abandoned overland walking plan, and is repurposing it now.",
+        "Discussion of Kale possibly guest-starring as a temporary NPC (like playing Hairbrush) during the split sessions."
+      ],
+      "source": "2026-10-14 19-44-25.mp3"
     }
   ],
-  "updated": "2026-09-30T23:22:14"
+  "updated": "2026-10-21T18:16:22"
 }
