@@ -130,6 +130,19 @@
           "text": "Botched an anchor drop that snapped the rope, crushed Gravestone, and woke the captain, then took heavy gunfire from Fishbone and was knocked to critical HP in the ensuing fight."
         }
       ]
+    },
+    {
+      "id": "simon",
+      "name": "Simon Mulch",
+      "player": "Kale",
+      "race": "Beaver",
+      "class": "Fighter",
+      "level": 4,
+      "status": "guest",
+      "description": "Simon Mulch is a foreman who takes things a little too seriously.",
+      "manual": true,
+      "log": [
+      ]
     }
   ],
   "npcs": [
