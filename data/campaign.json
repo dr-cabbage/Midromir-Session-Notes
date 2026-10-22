@@ -53,6 +53,10 @@
         {
           "session": 3,
           "text": "Took over steering the ship after Hairbrush fled the helm in terror. Fought Captain Fishbone with crossbow shots and Hunter's Mark, and panicked when Phineas's astral projection caused his body to collapse. Holding three of the four heart fruits."
+        },
+        {
+          "session": 4,
+          "text": "Forced into the role of acting 'Captain' to deal with Harrison Snow, used a laughably bad alias ('Mailing Gordakai') that immediately got him identified as a wanted man, then had to fight his own sentient evil shadow self in the town square. Won, but permanently lost his shadow and can now always be sensed by undead."
         }
       ]
     },
@@ -103,6 +107,10 @@
         {
           "session": 3,
           "text": "Overslept yet again and had to sneak aboard via firefly form last session; this session he arrived late to the fight against Fishbone, got dropped to 1 HP by a brutal critical hit, got revived with a goodberry, then turned the tide by relentlessly rage-baiting and eventually grappling and throwing Fishbone overboard."
+        },
+        {
+          "session": 4,
+          "text": "Spent most of the fight against Ghalen's shadow missing every single attack, then landed the exact finishing blow with a Trip Attack - only to roll a natural 0 trying to get Ghalen and Simon to believe he did it."
         }
       ]
     },
@@ -128,6 +136,10 @@
         {
           "session": 3,
           "text": "Botched an anchor drop that snapped the rope, crushed Gravestone, and woke the captain, then took heavy gunfire from Fishbone and was knocked to critical HP in the ensuing fight."
+        },
+        {
+          "session": 4,
+          "text": "Fell flat on his face disembarking the ship, looted 84 gold from the captain's quarters, got skewered for exactly 14 damage by the shadow's orb (dropping him instantly), failed a death save before stabilizing, and helped finish the shadow off with a Black Flash and thrown dagger."
         }
       ]
     },
@@ -142,6 +154,10 @@
       "description": "Simon Mulch is a foreman who takes things a little too seriously.",
       "manual": true,
       "log": [
+        {
+          "session": 4,
+          "text": "Guest beaver fighter and overzealous dock foreman who tried to arrest Ghalen as a wanted pirate, got chased into a fight with Ghalen's shadow self, took a mid-battle pee break, barely contributed combat-wise, and then confidently claimed full credit for killing the shadow."
+        }
       ]
     }
   ],
@@ -286,14 +302,18 @@
         {
           "session": 3,
           "text": "Was forced to take the helm, panicked the whole time, got a crayon map shoved in his face by Ghalen, fled from the wheel convinced the party was insane, and spent the rest of the session cowering in the kitchen."
+        },
+        {
+          "session": 4,
+          "text": "Refused to come out or help move cargo, too shaken by recent events; last seen being sailed away with the ship under Snow's control."
         }
       ],
-      "role": "Deckhand / reluctant helmsman",
-      "disposition": "friendly",
+      "role": "Deckhand",
+      "disposition": "neutral",
       "status": "alive",
-      "description": "Rookie deckhand searching for his long-lost fiance.",
+      "description": "Traumatized deckhand hiding in the ship's kitchen.",
       "location": "Ship kitchen",
-      "last_seen": 3
+      "last_seen": 4
     },
     {
       "id": "skidmark",
@@ -373,6 +393,57 @@
       "status": "dead",
       "description": "Barely-red-haired quartermaster.",
       "last_seen": 3
+    },
+    {
+      "id": "harrison-snow",
+      "name": "Harrison Snow",
+      "first_seen": 4,
+      "log": [
+        {
+          "session": 4,
+          "text": "Froze the ship on arrival, accepted Ghalen's cover story and the smuggling evidence, took custody of the ship and cargo, and warned the party to be gentle with Hairbrush before sailing off with the ship himself."
+        }
+      ],
+      "role": "Ice wizard / possible government official",
+      "disposition": "friendly",
+      "status": "alive",
+      "description": "A powerful ice-wielding stranger (goes by 'Snow') who froze the ship solid at port and demanded to speak with the captain.",
+      "location": "Port near the uncharted landmass",
+      "last_seen": 4
+    },
+    {
+      "id": "simon-mulch",
+      "name": "Simon Mulch",
+      "first_seen": 4,
+      "log": [
+        {
+          "session": 4,
+          "text": "Tried to arrest Ghalen as a wanted pirate, got dragged into the shadow fight, and ended up housing the party overnight in his doll-filled warehouse home."
+        }
+      ],
+      "role": "Dock foreman / guest party member",
+      "disposition": "friendly",
+      "status": "alive",
+      "description": "An overzealous beaver dock foreman convinced he single-handedly polices the whole port; voiced like Shelly Marsh from South Park with Paul Blart energy.",
+      "location": "The port town",
+      "last_seen": 4
+    },
+    {
+      "id": "ghalen-s-shadow",
+      "name": "Ghalen's Shadow",
+      "first_seen": 4,
+      "log": [
+        {
+          "session": 4,
+          "text": "Appeared out of nowhere, tried to steal back the party's magic orb, nearly killed Calazar and Ghalen with piercing orb shots, and was ultimately killed by a combined effort from Ghalen, Calazar, and Milo."
+        }
+      ],
+      "role": "Shadow self / antagonist",
+      "disposition": "hostile",
+      "status": "dead",
+      "description": "A sentient, evil doppelganger of Ghalen Mordecai calling itself 'Mailing Mordecai,' wielding a near-identical magic orb weapon and fighting as a level 5 version of Ghalen.",
+      "location": "The port town square",
+      "last_seen": 4
     }
   ],
   "locations": [],
@@ -394,11 +465,15 @@
         {
           "session": 3,
           "text": "The party's attempt to redirect the ship toward the correct port (instead of the Rat Folk Kingdom) led to chaos: the crew is dead, the captain overboard, and the group now split between the ship and open water."
+        },
+        {
+          "session": 4,
+          "text": "The ship made port near where Noah is believed to be, but Alexander and Phineas remain stranded at sea and separated from the rest of the group."
         }
       ],
-      "description": "A new unnamed area appeared on the map overnight; the party is trying to reach it.",
-      "giver": "N/A",
-      "last_seen": 3
+      "description": "The party's overall goal of finding Noah/the uncharted landmass.",
+      "giver": "unknown",
+      "last_seen": 4
     },
     {
       "id": "clear-the-party-s-name-in-tomoro",
@@ -413,11 +488,15 @@
         {
           "session": 3,
           "text": "No direct progress this session, but the body count keeps climbing, making this an increasingly tall order whenever they return."
+        },
+        {
+          "session": 4,
+          "text": "No direct progress this session, but the party's reputation took a new hit when Ghalen was publicly identified as a wanted pirate in the new port town."
         }
       ],
-      "description": "Find the real culprit behind the destroyed tavern in Tomoro to be allowed back into the village.",
-      "giver": "Tavern Owner (Tomoro)",
-      "last_seen": 3
+      "description": "Clearing the party's reputation after events in Tomoro.",
+      "giver": "unknown",
+      "last_seen": 4
     },
     {
       "id": "dispose-of-the-stolen-heart-fruits-discreetly",
@@ -432,9 +511,29 @@
         {
           "session": 3,
           "text": "The party harvested hearts from four dead crewmates to disguise the theft and weighted their bodies with cannonballs for a planned burial at sea."
+        },
+        {
+          "session": 4,
+          "text": "Ghalen successfully lied to Harrison Snow that the hearts had already been dealt with, keeping them hidden in the party's bags for now."
         }
       ],
-      "last_seen": 3
+      "last_seen": 4,
+      "description": "Getting rid of the four stolen heart fruits without drawing suspicion.",
+      "giver": "unknown"
+    },
+    {
+      "id": "survive-and-reunite-with-alexander-and-phineas",
+      "name": "Survive and Reunite with Alexander and Phineas",
+      "status": "active",
+      "first_seen": 4,
+      "log": [
+        {
+          "session": 4,
+          "text": "The group has no clear plan yet for how the two halves of the party will find each other again."
+        }
+      ],
+      "description": "Ghalen, Milo, and Calazar need to find a way to regroup with Alexander and Phineas, stranded at sea without a map.",
+      "last_seen": 4
     }
   ],
   "mysteries": [
@@ -492,6 +591,51 @@
       "resolution": "",
       "resolved": null,
       "description": "Calazar found documents suggesting this specific ship and its cargo run (the heart fruits) were deliberately sought out, with the true destination being the Rat Folk Kingdom rather than where the party wanted to go."
+    },
+    {
+      "id": "why-is-the-ship-s-cargo-ledger-mysteriously-blank",
+      "title": "Why is the ship's cargo ledger mysteriously blank?",
+      "status": "open",
+      "opened": 4,
+      "clues": [
+        {
+          "session": 4,
+          "text": "Ghalen found it blank again this session and handed it over to Harrison Snow as evidence something is off with the ship's paperwork."
+        }
+      ],
+      "resolution": "",
+      "resolved": null,
+      "description": "The captain's ledger that should record cargo sale prices keeps turning up blank no matter who investigates it."
+    },
+    {
+      "id": "who-or-what-is-ghalen-s-shadow",
+      "title": "Who or what is Ghalen's shadow?",
+      "status": "open",
+      "opened": 4,
+      "clues": [
+        {
+          "session": 4,
+          "text": "The shadow called itself 'Mailing Mordecai,' fought as a leveled-up evil mirror of Ghalen with its own version of the orb weapon, and was killed - but Ghalen now permanently lacks a shadow and can always be sensed by undead."
+        }
+      ],
+      "resolution": "",
+      "resolved": null,
+      "description": "Ghalen's shadow detached, became sentient, and acted independently with an evil version of his own equipment."
+    },
+    {
+      "id": "who-is-harrison-snow-and-what-is-he-part-of",
+      "title": "Who is Harrison Snow and what is he part of?",
+      "status": "open",
+      "opened": 4,
+      "clues": [
+        {
+          "session": 4,
+          "text": "He's apparently part of some hidden, world-unknown group ('Illuminati'-tier) alongside at least three other powerful companions; the DM confirmed he's an established NPC being 'soft-launched' for later plot."
+        }
+      ],
+      "resolution": "",
+      "resolved": null,
+      "description": "A mysterious, immensely powerful ice wizard who showed up to take control of the ship and cargo."
     }
   ],
   "loot": [
@@ -536,6 +680,36 @@
       "item": "Crayon-drawn map",
       "holder": "Phineas",
       "description": "A hand-drawn map Phineas used (unsuccessfully) to try to redirect Hairbrush's steering; slightly crumpled and torn after Phineas's astral-projection collapse, but later smoothed out."
+    },
+    {
+      "session": 4,
+      "item": "84 gold",
+      "holder": "Calazar",
+      "description": "Split evenly with Milo after being found in the captain's quarters (rolled a d100, doubled)."
+    },
+    {
+      "session": 4,
+      "item": "84 gold",
+      "holder": "Milo",
+      "description": "Milo's half of the gold Calazar found in the captain's quarters."
+    },
+    {
+      "session": 4,
+      "item": "Magic returning orb",
+      "holder": "Ghalen",
+      "description": "A shapeshifting ammunition orb that morphs into a crossbow bolt or thrown weapon, pierces through all targets in a straight line, and always returns to its wielder; reclaimed after killing the shadow."
+    },
+    {
+      "session": 4,
+      "item": "Ring of Refraction",
+      "holder": "Calazar",
+      "description": "A rose gold ring fused into Calazar's shotgun barrel; converts unarmed strikes and weapon damage into psychic damage."
+    },
+    {
+      "session": 4,
+      "item": "Pillow of Deep Sleep",
+      "holder": "Milo",
+      "description": "A magic pillow that puts the user to sleep on skin contact and reduces long rest time to three-quarters (used to long rest in 6 hours)."
     }
   ],
   "kills": [
@@ -591,6 +765,12 @@
       "session": 3,
       "character": "party",
       "creature": "Gravestone (killed by falling crates after anchor snapped)",
+      "count": 1
+    },
+    {
+      "session": 4,
+      "character": "Milo",
+      "creature": "Ghalen's Shadow",
       "count": 1
     }
   ],
@@ -664,6 +844,36 @@
       "session": 3,
       "speaker": "DM",
       "text": "He keeps hitting me in the dick."
+    },
+    {
+      "session": 4,
+      "speaker": "Simon Mulch",
+      "text": "I am an expert in all things combat."
+    },
+    {
+      "session": 4,
+      "speaker": "Simon Mulch",
+      "text": "You know what they say, you have to pee before the battle - because if it runs down your leg during, it's a distraction."
+    },
+    {
+      "session": 4,
+      "speaker": "Simon Mulch",
+      "text": "I deserve two snacks for an encounter such as this."
+    },
+    {
+      "session": 4,
+      "speaker": "Simon Mulch",
+      "text": "Bars Simon's a lot more confident now that he has a lot more health - the moment I get hit next he's gonna freak out."
+    },
+    {
+      "session": 4,
+      "speaker": "Ghalen",
+      "text": "Ghalen Mordecai... my mortal enemy."
+    },
+    {
+      "session": 4,
+      "speaker": "Simon Mulch",
+      "text": "No, I saw you miss all of your attacks. You couldn't hit a predator if he was right in front of you."
     }
   ],
   "sessions": [
@@ -782,7 +992,42 @@
         "Discussion of Kale possibly guest-starring as a temporary NPC (like playing Hairbrush) during the split sessions."
       ],
       "source": "2026-10-14 19-44-25.mp3"
+    },
+    {
+      "number": 4,
+      "date": "2026-10-21",
+      "title": "Captain Mordecai and the Evil Twin",
+      "summary": "The Galen/Milo/Calazar half of the party makes port, gets checked out by an ice cop, nearly gets arrested by a beaver cop, and then Galen fights his own evil shadow clone in the town square.",
+      "recap": [
+        "With the ship cleaned up (badly - Milo and Calazar failed so hard at scrubbing the lower deck that it stayed a crime scene), the crew raised sail and made for the nearest port to the uncharted landmass. Ghalen kept the ship steady with a strong Survival check, though his search of the captain's ledgers for cargo prices turned up mysteriously blank pages - again. The party also discovered they'd accidentally split their heart fruits along with the party: Alexander has one heart fruit, Ghalen the other three.",
+        "Coming into port a little too hot, the ship suddenly stopped dead - frozen solid in ice by a large stranger named Harrison Snow, standing casually on top of the water. Calazar ate deck rolling his Dex save and had to recover his dignity (and his robe) in front of Ghalen and Milo. Snow politely asked to speak to 'the captain,' which put Ghalen in the extremely awkward position of being volunteered as acting captain by the rest of the crew via the old hat trick (literally - he retrieved the real captain's hat and put it on).",
+        "Ghalen, now fully committed to being 'Captain Fishbone's replacement,' handed Snow the incriminating smuggling evidence, the mysteriously blank ledger, and a cover story about a tragic accident claiming the real captain. He successfully lied through his teeth about the stolen heart fruits still being in their bags. Snow bought it, shook on it, declared the ship and cargo under his jurisdiction, Ghalen warned him to be gentle with the traumatized Hairbrush, and walked off across the ice. Calazar pocketed 168 gold lifted from the captain's quarters and split it with Ghalen.",
+        "Milo, strolling off the ship, ran into the dock foreman: Simon Mulch, an overzealous beaver deputized to inspect the infamous Coppertide. Milo's deception attempts collapsed immediately, and things got worse when Simon spotted Ghalen - still wearing the captain's hat - and matched the name 'Mhalen Gordakai' (Ghalen's incredibly bad alias) to a wanted poster for Ghalen Mordecai. Busted, with a wolf pelt as the final nail in the coffin, Simon tried to arrest 'dead or alive' Ghalen on the spot.",
+        "The party chose knockout over compliance. Calazar silenced Simon, put a thrown dagger handle in his mouth, and tried to tackle him - but Simon's player rolled double nat 25s and spat the dagger out, dodging the grapple. A chase through the docks and into the empty town square followed, with Simon screaming about pirates attacking him while Ghalen and the party dashed and boxed him in with silence and bodies.",
+        "Mid-chase, a second figure appeared in the square - and Ghalen recognized him with a sinking feeling: his own shadow, now sentient, calling itself 'Mhalen Gordecai' and tried to steal Ghalen's magic orb weapon out of Ghalen's pocket. Ghalen held on by the skin of a strength save. Initiative was rolled, and Galen's Shadow turned out to be a genuinely terrifying mirror: level 5, dual hand-crossbows slapped with its own version of the orb (which pierces and returns through a straight line of targets), Vex weapon mastery for near-guaranteed advantage, and a life-drain reaction called 'Lick Wounds.'",
+        "The shadow's opening orb shot skewered Calazar, Ghalen, AND Simon in a single piercing line for 14 damage, dropping Calazar instantly (exactly 14 HP, his signature move). A second crossbow bolt barely missed finishing off Ghalen. Calazar failed his first stabilization attempt from Ghalen (a 6 on Medicine) and flatlined further, but clawed back with a Goodberry chug from Ghalen got him back to 1 HP and conscious. Milo, meanwhile, just kept whiffing attacks, while Simon flip-flopped between confusion, dueling bravado, and a mid-fight tactical pee break against a wall ('you have to pee before battle or it runs down your leg during').",
+        "The tide turned once everyone pincered the shadow: Ghalen unarmed-strike-slapped it with a nat20 (psychic damage, no reaction wasted since the shadow had already used its 'make an attack miss' reaction on Milo's spear), Calazar hit a shotgun blast plus a thrown dagger, and finally Milo - who had missed literally every attack all fight - finished it off with an unarmed strike with enough damage to kill it outright. The shadow dissipated into darkness, taking its secrets (and non-pursuable evidence) with it.",
+        "With his shadow destroyed, Ghalen keeps the permanent downside (undead can always sense him, and having no shadow) but loses the disadvantage on death saves. Simon, having contributed approximately nothing but noise and a stab wound, immediately took full credit for the kill and demanded half the (nonexistent, unprovable) reward. Milo rolled a literal 0 on Persuasion trying to correct the record, which - combined with nobody having any proof the shadow ever existed - left Ghalen genuinely second-guessing whether Simon might be right.",
+        "Simon led the battered party back to his home: a mostly-empty abandoned warehouse furnished with handmade dolls he talks to and treats as roommates, plus a pile of extra bedrolls (reserved for the dolls, not guests). Calazar meditated cross-legged, Milo used his Pillow of Deep Sleep to knock out a long rest in six hours, and Simon passed out instantly even though he wanted to stay up all night buzzing with adrenaline about his 'heroic victory' story for the morning. Before dawn, with Ghalen's likeness as a wanted man now thoroughly (if falsely) associated with pirates and chaos in this town, the group packed up and slipped out of port - new mysteries and a reclaimed magic orb."
+      ],
+      "highlights": [
+        "Ghalen gets accidentally promoted to 'Captain' via a hat, and has to fully commit to the bit with a government official.",
+        "Calazar face-plants off the ship at port and has to play it cool after both Milo and Ghalen clock his embarrassing fall.",
+        "Simon Mulch rolls double 25s to dodge a silenced dagger-and-tackle combo mid-interrogation.",
+        "The shadow's orb weapon pierces Calazar, Ghalen, and Simon in one shot, instantly dropping Calazar at exactly 14 HP - his signature.",
+        "Milo misses every single attack roll for most of the fight, then lands the exact killing blow on the shadow with a punch - and then loses the Persuasion roll to get credit for it (natural 0).",
+        "Simon takes a full tactical pee break mid-combat and still tries to claim hero status afterward."
+      ],
+      "decisions": [
+        "The party let Harrison Snow take full custody of the ship, cargo, and smuggling evidence rather than keep or sell any of it.",
+        "The party chose to subdue/knock out Simon Mulch rather than let him arrest or expose Ghalen, but didn't",
+        "The party let Simon claim credit for killing the shadow rather than contest it further, to keep the peace and get a place to rest."
+      ],
+      "cliffhanger": "With Ghalen's shadow destroyed but his wanted status now a town legend, the group sneaks out of port before dawn, still trying to figure out how they'll ever reunite with Alexander and Phineas, who are stranded somewhere out in open water with no map and no idea where this ship even went.",
+      "in_game_days": "",
+      "table_talk": [],
+      "source": "2026-10-21 19-28-49.mp3"
     }
   ],
-  "updated": "2026-10-21T18:16:22"
+  "updated": "2026-10-22T01:00:26"
 }
